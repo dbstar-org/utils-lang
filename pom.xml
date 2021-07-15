@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.dbstarll.parent</groupId>
+        <artifactId>base</artifactId>
+        <version>1.0</version>
+    </parent>
+    <groupId>io.github.dbstarll.utils</groupId>
+    <artifactId>utils-lang</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>utils-lang</name>
+    <description>commons lang utils</description>
+    <url>https://github.com/dbstarll/utils-lang</url>
+
+    <scm>
+        <connection>scm:git:${project.git.git.root}</connection>
+        <developerConnection>scm:git:${project.git.git.root}</developerConnection>
+        <url>${project.git.web.master}</url>
+    </scm>
+
+    <distributionManagement>
+        <site>
+            <id>local</id>
+            <url>${project.site.root.project}</url>
+        </site>
+    </distributionManagement>
+
+    <properties>
+        <project.git.project>utils-lang</project.git.project>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+    </dependencies>
+</project>
