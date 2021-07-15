@@ -14,6 +14,7 @@ public final class LineUtils {
     /**
      * 操作每一行数据.
      *
+     * @param <E>          class of lineOperator's result
      * @param lines        所有的行
      * @param lineOperator 行操作
      * @return 行操作结果的计数器
@@ -31,6 +32,7 @@ public final class LineUtils {
     /**
      * 操作每一行数据.
      *
+     * @param <E>          class of lineOperator's result
      * @param logger       日志记录
      * @param name         加载的资源名称
      * @param in           加载的资源流
@@ -69,6 +71,7 @@ public final class LineUtils {
     /**
      * 操作每一行数据.
      *
+     * @param <E>          class of lineOperator's result
      * @param logger       日志记录
      * @param name         加载的资源名称
      * @param in           加载的资源流

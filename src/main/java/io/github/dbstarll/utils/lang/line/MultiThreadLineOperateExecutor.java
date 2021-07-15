@@ -13,6 +13,7 @@ public class MultiThreadLineOperateExecutor<E extends Comparable<E>> extends Lin
      *
      * @param operator 单行处理器
      * @param thread   并发线程数量
+     * @param capacity 队列容量
      */
     protected MultiThreadLineOperateExecutor(LineOperator<E> operator, int thread, int capacity) {
         super(operator);

@@ -18,10 +18,12 @@ public class MultiThreadBatchLineOperateExecutor<E extends Comparable<E>> extend
     /**
      * 构建一个多线程行批处理器.
      *
+     * @param <E>      class of lineOperator's result
      * @param operator 行批处理器
      * @param batch    批处理规模
      * @param thread   并发线程数量
      * @param capacity the capacity of this queue
+     * @return MultiThreadBatchLineOperateExecutor
      */
     public static <E extends Comparable<E>> MultiThreadBatchLineOperateExecutor<E> build(BatchLineOperator<E> operator,
                                                                                          int batch, int thread, int capacity) {
