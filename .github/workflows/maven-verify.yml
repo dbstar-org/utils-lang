@@ -5,7 +5,6 @@ on: [push, workflow_dispatch]
 jobs:
   verify:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
@@ -61,3 +60,9 @@ jobs:
 
       - name: Verify with Maven
         run: mvn --batch-mode --update-snapshots clean verify
+
+  deploy:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo deploy
