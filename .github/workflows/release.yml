@@ -18,6 +18,19 @@ jobs:
       - name: Generate Maven Settings
         uses: whelk-io/maven-settings-xml-action@v18
         with:
+          repositories: >
+            [
+              {
+                "id": "ossrh",
+                "url": "https://s01.oss.sonatype.org/content/groups/public",
+                "releases": {
+                  "enabled": "true"
+                },
+                "snapshots": {
+                  "enabled": "false"
+                }
+              }
+            ]
           servers: >
             [
               {
@@ -46,20 +59,20 @@ jobs:
 
       - name: Configure Git user
         run: |
-          git config --local user.name dbstar
-          git config --local user.email dbstarll@gmail.com
-          git config --local user.signingkey 2204EEA5DBB58935AD22D5667BB735D83657A56A
+          git config --local user.name ${{ github.actor }}
+          git config --local user.email ${{ github.actor }}@gmail.com
+          git config --local user.signingkey ${{ secrets.GPG_KEY }}
           git config --local commit.gpgsign true
 
       - name: Prepare Release
-        run: mvn -B -U release:prepare -P release,repository-github,distribution-github
+        run: mvn -B -U release:prepare -P release,distribution-github
 
       - run: cp ${{ github.workspace }}/release.properties ${{ github.workspace }}/release.properties.bak
 
       - name: Perform Release to Github
-        run: mvn -B -U release:perform -P release,repository-github,distribution-github
+        run: mvn -B -U release:perform -P release,distribution-github
 
       - run: mv ${{ github.workspace }}/release.properties.bak ${{ github.workspace }}/release.properties
 
       - name: Perform Release to Ossrh
-        run: mvn -B -U release:perform -P release,repository-ossrh,distribution-ossrh
+        run: mvn -B -U release:perform -P release,distribution-ossrh
