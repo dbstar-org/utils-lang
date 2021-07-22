@@ -37,3 +37,5 @@ jobs:
         run: mvn -B -U clean deploy -P release,distribution-github
 
       - run: mvn -version
+
+      - run: cat /usr/share/apache-maven-3.8.1/conf/settings.xml
