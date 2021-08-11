@@ -3,6 +3,10 @@ package io.github.dbstarll.utils.lang;
 import java.nio.charset.Charset;
 
 public final class StandardCharsets {
+    private StandardCharsets() {
+        //隐藏构造器
+    }
+
     /**
      * Seven-bit ASCII, a.k.a. ISO646-US, a.k.a. the Basic Latin block of the Unicode character set
      */

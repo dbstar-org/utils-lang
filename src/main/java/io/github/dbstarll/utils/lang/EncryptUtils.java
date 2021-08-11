@@ -12,7 +12,18 @@ import java.util.Arrays;
  * @author dbstar
  */
 public final class EncryptUtils {
+    private EncryptUtils() {
+        //隐藏构造器
+    }
+
+    /**
+     * algorithm of MD5.
+     */
     public static final String ALGORITHM_MD5 = "MD5";
+
+    /**
+     * algorithm of SHA.
+     */
     public static final String ALGORITHM_SHA = "SHA";
 
     /**
@@ -22,7 +33,7 @@ public final class EncryptUtils {
      * @param encryptedKey 秘钥
      * @return 加密后的字节数组
      */
-    public static byte[] encryptCopy(byte[] data, Bytes encryptedKey) {
+    public static byte[] encryptCopy(final byte[] data, final Bytes encryptedKey) {
         return data == null ? null : encryptReplace(Arrays.copyOf(data, data.length), encryptedKey);
     }
 
@@ -33,7 +44,7 @@ public final class EncryptUtils {
      * @param encryptedKey 秘钥
      * @return 加密后的字节数组
      */
-    public static byte[] encryptReplace(byte[] data, Bytes encryptedKey) {
+    public static byte[] encryptReplace(final byte[] data, final Bytes encryptedKey) {
         if (data != null) {
             encrypt(data, 0, data.length, encryptedKey, 0);
         }
@@ -50,7 +61,8 @@ public final class EncryptUtils {
      * @param position     位置
      * @return 加密处理过的字节数
      */
-    public static int encrypt(byte[] data, int offset, int length, Bytes encryptedKey, long position) {
+    public static int encrypt(final byte[] data, final int offset, final int length, final Bytes encryptedKey,
+                              final long position) {
         final byte[] bs = encryptedKey.get();
         final int keyLen = bs.length;
         final int end = offset + length;
@@ -79,7 +91,7 @@ public final class EncryptUtils {
      * @param position     位置
      * @return 加密后字节
      */
-    public static byte getEncryptedByte(byte data, Bytes encryptedKey, long position) {
+    public static byte getEncryptedByte(final byte data, final Bytes encryptedKey, final long position) {
         return getEncryptedByte(data, getEncryptByte(encryptedKey, position));
     }
 
@@ -90,7 +102,7 @@ public final class EncryptUtils {
      * @param encryptByte 秘钥字节
      * @return 加密后字节
      */
-    private static byte getEncryptedByte(byte data, byte encryptByte) {
+    private static byte getEncryptedByte(final byte data, final byte encryptByte) {
         return (byte) (data ^ encryptByte);
     }
 
@@ -101,7 +113,7 @@ public final class EncryptUtils {
      * @param position     位置
      * @return 指定位置的秘钥字节
      */
-    private static byte getEncryptByte(Bytes encryptedKey, long position) {
+    private static byte getEncryptByte(final Bytes encryptedKey, final long position) {
         return encryptedKey.get((int) (position % encryptedKey.length()));
     }
 
@@ -114,7 +126,7 @@ public final class EncryptUtils {
      * @throws NoSuchAlgorithmException if no Provider supports a MessageDigestSpi implementation for
      *                                  the specified algorithm.
      */
-    public static byte[] digest(byte[] data, String algorithm) throws NoSuchAlgorithmException {
+    public static byte[] digest(final byte[] data, final String algorithm) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance(algorithm);
         md.update(data);
         return md.digest();
@@ -128,7 +140,7 @@ public final class EncryptUtils {
      * @throws NoSuchAlgorithmException if no Provider supports a MessageDigestSpi implementation for
      *                                  the specified algorithm.
      */
-    public static byte[] md5(byte[] data) throws NoSuchAlgorithmException {
+    public static byte[] md5(final byte[] data) throws NoSuchAlgorithmException {
         return digest(data, ALGORITHM_MD5);
     }
 
@@ -141,7 +153,7 @@ public final class EncryptUtils {
      * @throws NoSuchAlgorithmException if no Provider supports a MessageDigestSpi implementation for
      *                                  the specified algorithm.
      */
-    public static byte[] sha(byte[] data, int strength) throws NoSuchAlgorithmException {
+    public static byte[] sha(final byte[] data, final int strength) throws NoSuchAlgorithmException {
         return digest(data, ALGORITHM_SHA + "-" + strength);
     }
 
@@ -154,7 +166,7 @@ public final class EncryptUtils {
      * @throws NoSuchAlgorithmException if no Provider supports a MessageDigestSpi implementation for
      *                                  the specified algorithm.
      */
-    public static byte[] sha(String data, int strength) throws NoSuchAlgorithmException {
+    public static byte[] sha(final String data, final int strength) throws NoSuchAlgorithmException {
         return sha(data.getBytes(StandardCharsets.UTF_8), strength);
     }
 }

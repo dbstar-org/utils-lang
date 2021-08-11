@@ -7,13 +7,6 @@ import java.util.UUID;
 
 public class TestUuidUtils extends TestCase {
   /**
-   * 测试{@link UuidUtils#UuidUtils()}.
-   */
-  public void testNew() {
-    new UuidUtils();
-  }
-
-  /**
    * 测试{@link UuidUtils#randomUuid()}.
    */
   public void testRandomUuid() {

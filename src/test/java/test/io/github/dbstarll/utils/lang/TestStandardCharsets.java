@@ -6,13 +6,6 @@ import junit.framework.TestCase;
 import java.nio.charset.Charset;
 
 public class TestStandardCharsets extends TestCase {
-  /**
-   * 测试{@link StandardCharsets#StandardCharsets()}.
-   */
-  public void testNew() {
-    new StandardCharsets();
-  }
-
   public void testUsAscii() {
     assertEquals(StandardCharsets.US_ASCII, Charset.forName("US-ASCII"));
   }
