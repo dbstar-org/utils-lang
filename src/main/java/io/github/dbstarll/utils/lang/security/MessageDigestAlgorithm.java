@@ -5,11 +5,11 @@ public enum MessageDigestAlgorithm {
 
     private final String algorithm;
 
-    private MessageDigestAlgorithm() {
+    MessageDigestAlgorithm() {
         this(null);
     }
 
-    private MessageDigestAlgorithm(String algorithm) {
+    MessageDigestAlgorithm(String algorithm) {
         this.algorithm = algorithm;
     }
 

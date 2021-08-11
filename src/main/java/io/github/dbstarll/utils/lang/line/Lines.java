@@ -64,7 +64,7 @@ public class Lines extends LineIterator implements Iterable<String> {
 
     @Override
     protected final boolean isValidLine(String line) {
-        return lineValidator == null ? true : lineValidator.isValidLine(line);
+        return lineValidator == null || lineValidator.isValidLine(line);
     }
 
     @Override

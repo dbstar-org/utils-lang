@@ -5,11 +5,11 @@ public enum SslContextAlgorithm {
 
     private final String algorithm;
 
-    private SslContextAlgorithm() {
+    SslContextAlgorithm() {
         this(null);
     }
 
-    private SslContextAlgorithm(String algorithm) {
+    SslContextAlgorithm(String algorithm) {
         this.algorithm = algorithm;
     }
 
