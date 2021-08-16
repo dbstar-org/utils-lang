@@ -3,15 +3,35 @@ package io.github.dbstarll.utils.lang.wrapper;
 import java.util.Map.Entry;
 
 public class EntryWrapper<K, V> implements Entry<K, V> {
+    /**
+     * key of the entry.
+     */
     private final K key;
+
+    /**
+     * value of the entry.
+     */
     private final V value;
+
+    /**
+     * hash of the entry.
+     */
     private final int hash;
 
-    public static final <K, V> EntryWrapper<K, V> wrap(K key, V value) {
+    /**
+     * create a wrapped entry.
+     *
+     * @param key   key of the entry
+     * @param value value of the entry
+     * @param <K>   type of key
+     * @param <V>   type of value
+     * @return the wrapped entry
+     */
+    public static final <K, V> EntryWrapper<K, V> wrap(final K key, final V value) {
         return new EntryWrapper<K, V>(key, value);
     }
 
-    protected EntryWrapper(K key, V value) {
+    protected EntryWrapper(final K key, final V value) {
         this.key = key;
         this.value = value;
         this.hash = getHashCode(key, value);
@@ -28,7 +48,7 @@ public class EntryWrapper<K, V> implements Entry<K, V> {
     }
 
     @Override
-    public final V setValue(V value) {
+    public final V setValue(final V newValue) {
         throw new UnsupportedOperationException();
     }
 
@@ -38,7 +58,7 @@ public class EntryWrapper<K, V> implements Entry<K, V> {
     }
 
     @Override
-    public final boolean equals(Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         } else if (obj == null) {
@@ -65,7 +85,7 @@ public class EntryWrapper<K, V> implements Entry<K, V> {
         return true;
     }
 
-    private static int getHashCode(Object key, Object value) {
+    private static int getHashCode(final Object key, final Object value) {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((key == null) ? 0 : key.hashCode());
@@ -73,6 +93,9 @@ public class EntryWrapper<K, V> implements Entry<K, V> {
         return result;
     }
 
+    /**
+     * @return toString.
+     */
     @Override
     public String toString() {
         return key + "=" + value;

@@ -3,9 +3,12 @@ package io.github.dbstarll.utils.lang.wrapper;
 import java.util.Iterator;
 
 public abstract class IteratorWrapper<I, O> implements Iterator<O> {
+    /**
+     * wrapped Iterator.
+     */
     private final Iterator<I> iterator;
 
-    public IteratorWrapper(Iterator<I> iterator) {
+    protected IteratorWrapper(final Iterator<I> iterator) {
         this.iterator = iterator;
     }
 
