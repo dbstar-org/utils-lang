@@ -5,12 +5,27 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public final class KeyGeneratorBuilder extends AbstractSecurityBuilder<KeyGenerator, KeyGeneratorAlgorithm> {
-  public KeyGeneratorBuilder(KeyGeneratorAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
-    super(KeyGenerator.class, algorithm);
-  }
+    /**
+     * 构造KeyGeneratorBuilder.
+     *
+     * @param algorithm KeyGeneratorAlgorithm
+     * @throws NoSuchAlgorithmException 未知算法
+     * @throws InstanceException        不能实例化
+     */
+    public KeyGeneratorBuilder(final KeyGeneratorAlgorithm algorithm)
+            throws NoSuchAlgorithmException, InstanceException {
+        super(KeyGenerator.class, algorithm);
+    }
 
-  public KeyGeneratorBuilder keySize(int keysize, SecureRandom random) {
-    getType().init(keysize, random);
-    return this;
-  }
+    /**
+     * 设置key和随机数，并返回KeyGeneratorBuilder.
+     *
+     * @param keysize key大小
+     * @param random  随机数
+     * @return KeyGeneratorBuilder
+     */
+    public KeyGeneratorBuilder keySize(final int keysize, final SecureRandom random) {
+        getType().init(keysize, random);
+        return this;
+    }
 }

@@ -6,10 +6,10 @@ import junit.framework.TestCase;
 public class TestLineValidator extends TestCase {
 
     /**
-     * 测试{@link LineValidator#All}.
+     * 测试{@link LineValidator#ALL}.
      */
     public void testAll() {
-        LineValidator validator = LineValidator.All;
+        LineValidator validator = LineValidator.ALL;
 
         assertTrue(validator.isValidLine("line"));
         assertTrue(validator.isValidLine("   line"));
@@ -20,10 +20,10 @@ public class TestLineValidator extends TestCase {
     }
 
     /**
-     * 测试{@link LineValidator#NotBlank}.
+     * 测试{@link LineValidator#NOT_BLANK}.
      */
     public void testNotBlank() {
-        LineValidator validator = LineValidator.NotBlank;
+        LineValidator validator = LineValidator.NOT_BLANK;
 
         assertTrue(validator.isValidLine("line"));
         assertTrue(validator.isValidLine("   line"));
@@ -34,10 +34,10 @@ public class TestLineValidator extends TestCase {
     }
 
     /**
-     * 测试{@link LineValidator#NotComment}.
+     * 测试{@link LineValidator#NOT_COMMENT}.
      */
     public void testNotComment() {
-        LineValidator validator = LineValidator.NotComment;
+        LineValidator validator = LineValidator.NOT_COMMENT;
 
         assertTrue(validator.isValidLine("line"));
         assertTrue(validator.isValidLine("   line"));

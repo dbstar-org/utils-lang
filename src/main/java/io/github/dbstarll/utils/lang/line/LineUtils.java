@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class LineUtils {
+    private LineUtils() {
+        //隐藏构造器
+    }
+
     /**
      * 操作每一行数据.
      *
@@ -19,7 +23,7 @@ public final class LineUtils {
      * @param lineOperator 行操作
      * @return 行操作结果的计数器
      */
-    public static <E> Map<E, Integer> operate(Iterable<String> lines, LineOperator<E> lineOperator) {
+    public static <E> Map<E, Integer> operate(final Iterable<String> lines, final LineOperator<E> lineOperator) {
         final Map<E, Integer> counters = new HashMap<E, Integer>();
         for (String line : lines) {
             final E result = lineOperator.operate(line);
@@ -41,8 +45,12 @@ public final class LineUtils {
      * @param lineOperator 行操作
      * @return 行操作结果的计数器
      */
-    public static <E> Map<E, Integer> operate(Logger logger, String name, InputStream in, String encryptedKey,
-                                              int strength, LineOperator<E> lineOperator) {
+    public static <E> Map<E, Integer> operate(final Logger logger,
+                                              final String name,
+                                              final InputStream in,
+                                              final String encryptedKey,
+                                              final int strength,
+                                              final LineOperator<E> lineOperator) {
         final Bytes key;
         try {
             key = new Bytes(EncryptUtils.sha(encryptedKey, strength));
@@ -56,7 +64,7 @@ public final class LineUtils {
 
         final Iterable<String> lines;
         try {
-            lines = Lines.openGZip(in, key, StandardCharsets.UTF_8, LineValidator.NotComment);
+            lines = Lines.openGZip(in, key, StandardCharsets.UTF_8, LineValidator.NOT_COMMENT);
         } catch (Throwable ex) {
             if (logger != null) {
                 logger.error("无法加载" + name + "列表。", ex);
@@ -79,8 +87,11 @@ public final class LineUtils {
      * @param lineOperator 行操作
      * @return 行操作结果的计数器
      */
-    public static <E> Map<E, Integer> operate(Logger logger, String name, InputStream in, String encryptedKey,
-                                              LineOperator<E> lineOperator) {
+    public static <E> Map<E, Integer> operate(final Logger logger,
+                                              final String name,
+                                              final InputStream in,
+                                              final String encryptedKey,
+                                              final LineOperator<E> lineOperator) {
         return operate(logger, name, in, encryptedKey, 1, lineOperator);
     }
 
@@ -91,7 +102,7 @@ public final class LineUtils {
      * @param lineOperator 行操作
      * @return 返回处理的总行数
      */
-    public static int operate(Iterable<String> lines, VoidLineOperator lineOperator) {
+    public static int operate(final Iterable<String> lines, final VoidLineOperator lineOperator) {
         int counter = 0;
         for (String line : lines) {
             lineOperator.operate(line);
@@ -111,8 +122,12 @@ public final class LineUtils {
      * @param lineOperator 行操作
      * @return 返回处理的总行数
      */
-    public static int operate(Logger logger, String name, InputStream in, String encryptedKey, int strength,
-                              VoidLineOperator lineOperator) {
+    public static int operate(final Logger logger,
+                              final String name,
+                              final InputStream in,
+                              final String encryptedKey,
+                              final int strength,
+                              final VoidLineOperator lineOperator) {
         final Bytes key;
         try {
             key = new Bytes(EncryptUtils.sha(encryptedKey, strength));
@@ -126,7 +141,7 @@ public final class LineUtils {
 
         final Iterable<String> lines;
         try {
-            lines = Lines.openGZip(in, key, StandardCharsets.UTF_8, LineValidator.NotComment);
+            lines = Lines.openGZip(in, key, StandardCharsets.UTF_8, LineValidator.NOT_COMMENT);
         } catch (Throwable ex) {
             if (logger != null) {
                 logger.error("无法加载" + name + "列表。", ex);
@@ -148,8 +163,11 @@ public final class LineUtils {
      * @param lineOperator 行操作
      * @return 返回处理的总行数
      */
-    public static int operate(Logger logger, String name, InputStream in, String encryptedKey,
-                              VoidLineOperator lineOperator) {
+    public static int operate(final Logger logger,
+                              final String name,
+                              final InputStream in,
+                              final String encryptedKey,
+                              final VoidLineOperator lineOperator) {
         return operate(logger, name, in, encryptedKey, 1, lineOperator);
     }
 }

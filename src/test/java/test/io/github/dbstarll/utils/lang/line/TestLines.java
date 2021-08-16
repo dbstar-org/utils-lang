@@ -36,7 +36,7 @@ public class TestLines extends TestCase {
      */
     public void testOpenFile() throws IOException {
         assertEquals(6, read(Lines.open(new File("src/test/resources/lines.txt"),
-                StandardCharsets.UTF_8, LineValidator.All)));
+                StandardCharsets.UTF_8, LineValidator.ALL)));
     }
 
     /**
@@ -46,7 +46,7 @@ public class TestLines extends TestCase {
      */
     public void testOpenGzipFile() throws IOException {
         assertEquals(6, read(Lines.openGZip(new File("src/test/resources/lines.txt.gz"),
-                StandardCharsets.UTF_8, LineValidator.All)));
+                StandardCharsets.UTF_8, LineValidator.ALL)));
     }
 
     /**
@@ -74,7 +74,7 @@ public class TestLines extends TestCase {
      */
     public void testOpenResource() throws IOException {
         assertEquals(4, read(
-                Lines.open(TestLines.class, "/lines.txt", StandardCharsets.UTF_8, LineValidator.NotBlank)));
+                Lines.open(TestLines.class, "/lines.txt", StandardCharsets.UTF_8, LineValidator.NOT_BLANK)));
     }
 
     /**
@@ -84,7 +84,7 @@ public class TestLines extends TestCase {
      */
     public void testOpenGzipResource() throws IOException {
         assertEquals(4, read(Lines.openGZip(TestLines.class, "/lines.txt.gz", StandardCharsets.UTF_8,
-                LineValidator.NotBlank)));
+                LineValidator.NOT_BLANK)));
     }
 
     /**
@@ -94,7 +94,7 @@ public class TestLines extends TestCase {
      */
     public void testOpenEncrypted() throws IOException {
         assertEquals(6, read(Lines.open(ClassLoader.getSystemResourceAsStream("lines-encrypt.txt"),
-                encryptedKey, StandardCharsets.UTF_8, LineValidator.All)));
+                encryptedKey, StandardCharsets.UTF_8, LineValidator.ALL)));
     }
 
     /**
@@ -105,7 +105,7 @@ public class TestLines extends TestCase {
     public void testOpenGzipEncrypted() throws IOException {
         assertEquals(6,
                 read(Lines.openGZip(ClassLoader.getSystemResourceAsStream("lines.txt-encrypt.gz"),
-                        encryptedKey, StandardCharsets.UTF_8, LineValidator.All)));
+                        encryptedKey, StandardCharsets.UTF_8, LineValidator.ALL)));
     }
 
     /**
@@ -117,7 +117,7 @@ public class TestLines extends TestCase {
         assertEquals(6,
                 read(Lines.open(new EncryptInputStream(
                         new GZIPInputStream(ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz")),
-                        encryptedKey), encryptedKey, StandardCharsets.UTF_8, LineValidator.All)));
+                        encryptedKey), encryptedKey, StandardCharsets.UTF_8, LineValidator.ALL)));
     }
 
     /**
@@ -131,7 +131,7 @@ public class TestLines extends TestCase {
                         Lines.openGZip(
                                 new EncryptInputStream(
                                         ClassLoader.getSystemResourceAsStream("lines.txt-encrypt.gz"), encryptedKey),
-                                encryptedKey, StandardCharsets.UTF_8, LineValidator.All)));
+                                encryptedKey, StandardCharsets.UTF_8, LineValidator.ALL)));
     }
 
     /**

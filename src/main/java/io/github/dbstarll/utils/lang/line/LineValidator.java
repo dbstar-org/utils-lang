@@ -16,23 +16,23 @@ public interface LineValidator {
      */
     boolean isValidLine(String line);
 
-    LineValidator All = new LineValidator() {
+    LineValidator ALL = new LineValidator() {
         @Override
-        public boolean isValidLine(String line) {
+        public boolean isValidLine(final String line) {
             return true;
         }
     };
 
-    LineValidator NotBlank = new LineValidator() {
+    LineValidator NOT_BLANK = new LineValidator() {
         @Override
-        public boolean isValidLine(String line) {
+        public boolean isValidLine(final String line) {
             return StringUtils.isNotBlank(line);
         }
     };
 
-    LineValidator NotComment = new LineValidator() {
+    LineValidator NOT_COMMENT = new LineValidator() {
         @Override
-        public boolean isValidLine(String line) {
+        public boolean isValidLine(final String line) {
             return StringUtils.isNotBlank(line) && !line.startsWith("#");
         }
     };

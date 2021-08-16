@@ -21,8 +21,19 @@ public class MultiThreadLineOperateExecutor<E extends Comparable<E>> extends Lin
                 new LinkedBlockingQueue<Runnable>(capacity));
     }
 
-    public static <E extends Comparable<E>> MultiThreadLineOperateExecutor<E> build(final LineOperator<E> operator, final int thread,
-                                                                                    final int capacity) {
+    /**
+     * 构造MultiThreadLineOperateExecutor.
+     *
+     * @param operator 单行处理器
+     * @param thread   并发线程数量
+     * @param capacity 队列容量
+     * @param <E>      单行处理器的返回类型
+     * @return MultiThreadLineOperateExecutor
+     */
+    public static <E extends Comparable<E>> MultiThreadLineOperateExecutor<E> build(
+            final LineOperator<E> operator,
+            final int thread,
+            final int capacity) {
         return new MultiThreadLineOperateExecutor<E>(operator, thread, capacity);
     }
 

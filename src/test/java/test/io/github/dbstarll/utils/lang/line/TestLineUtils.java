@@ -37,7 +37,7 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperate() throws IOException {
         Iterable<String> lines = Lines.open(new File("src/test/resources/lines.txt"),
-                StandardCharsets.UTF_8, LineValidator.All);
+                StandardCharsets.UTF_8, LineValidator.ALL);
         Map<LineType, Integer> rs = LineUtils.operate(lines, LINE_TYPE_OPERATOR);
         assertEquals(2, rs.get(LineType.blank).intValue());
         assertEquals(1, rs.get(LineType.comment).intValue());
@@ -92,7 +92,7 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateVoid() throws IOException {
         Iterable<String> lines = Lines.open(new File("src/test/resources/lines.txt"),
-                StandardCharsets.UTF_8, LineValidator.All);
+                StandardCharsets.UTF_8, LineValidator.ALL);
         int rs = LineUtils.operate(lines, VOID_OPERATOR);
         assertEquals(6, rs);
     }
