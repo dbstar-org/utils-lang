@@ -8,11 +8,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public final class SslContextBuilder extends AbstractSecurityBuilder<SSLContext, SslContextAlgorithm> {
-    public SslContextBuilder(SslContextAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
+    public SslContextBuilder(final SslContextAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
         super(SSLContext.class, algorithm);
     }
 
-    public SslContextBuilder init(KeyManager[] km, TrustManager[] tm, SecureRandom random) throws KeyManagementException {
+    public SslContextBuilder init(final KeyManager[] km, final TrustManager[] tm, final SecureRandom random) throws KeyManagementException {
         getType().init(km, tm, random);
         return this;
     }

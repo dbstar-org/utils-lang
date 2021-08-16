@@ -9,7 +9,7 @@ public abstract class VoidLineOperator implements LineOperator<String> {
     private static final String OPERATE_RESULT = "COUNT";
 
     @Override
-    public final String operate(String line) {
+    public final String operate(final String line) {
         operateWithoutReturn(line);
         return OPERATE_RESULT;
     }

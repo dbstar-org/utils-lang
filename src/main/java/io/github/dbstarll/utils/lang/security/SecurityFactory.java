@@ -5,7 +5,7 @@ import java.security.Provider;
 import java.security.Security;
 
 public final class SecurityFactory {
-    public static int addProvider(Provider provider) {
+    public static int addProvider(final Provider provider) {
         return Security.addProvider(provider);
     }
 
@@ -30,13 +30,13 @@ public final class SecurityFactory {
     // CertStore
     // ..[Collection, LDAP]
 
-    public static CertificateFactoryBuilder builder(CertificateFactoryAlgorithm algorithm)
+    public static CertificateFactoryBuilder builder(final CertificateFactoryAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new CertificateFactoryBuilder(algorithm);
     }
 
-    public static CipherBuilder builder(CipherAlgorithm algorithm, CipherAlgorithmMode mode,
-                                        CipherAlgorithmPadding padding) throws NoSuchAlgorithmException, InstanceException {
+    public static CipherBuilder builder(final CipherAlgorithm algorithm, final CipherAlgorithmMode mode,
+                                        final CipherAlgorithmPadding padding) throws NoSuchAlgorithmException, InstanceException {
         return new CipherBuilder(algorithm, mode, padding);
     }
 
@@ -47,12 +47,12 @@ public final class SecurityFactory {
     // ..[DH, ECDH]
     // ..........DH=[DiffieHellman]
 
-    public static KeyFactoryBuilder builder(KeyFactoryAlgorithm algorithm)
+    public static KeyFactoryBuilder builder(final KeyFactoryAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new KeyFactoryBuilder(algorithm);
     }
 
-    public static KeyGeneratorBuilder builder(KeyGeneratorAlgorithm algorithm)
+    public static KeyGeneratorBuilder builder(final KeyGeneratorAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new KeyGeneratorBuilder(algorithm);
     }
@@ -60,26 +60,26 @@ public final class SecurityFactory {
     // KeyInfoFactory
     // ..[DOM]
 
-    public static KeyManagerFactoryBuilder builder(KeyManagerFactoryAlgorithm algorithm)
+    public static KeyManagerFactoryBuilder builder(final KeyManagerFactoryAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new KeyManagerFactoryBuilder(algorithm);
     }
 
-    public static KeyPairGeneratorBuilder builder(KeyPairGeneratorAlgorithm algorithm)
+    public static KeyPairGeneratorBuilder builder(final KeyPairGeneratorAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new KeyPairGeneratorBuilder(algorithm);
     }
 
-    public static KeyStoreBuilder builder(KeyStoreAlgorithm algorithm)
+    public static KeyStoreBuilder builder(final KeyStoreAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new KeyStoreBuilder(algorithm);
     }
 
-    public static MacBuilder builder(MacAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
+    public static MacBuilder builder(final MacAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
         return new MacBuilder(algorithm);
     }
 
-    public static MessageDigestBuilder builder(MessageDigestAlgorithm algorithm)
+    public static MessageDigestBuilder builder(final MessageDigestAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new MessageDigestBuilder(algorithm);
     }
@@ -87,7 +87,7 @@ public final class SecurityFactory {
     // Policy
     // ..[JavaPolicy]
 
-    public static SslContextBuilder builder(SslContextAlgorithm algorithm)
+    public static SslContextBuilder builder(final SslContextAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new SslContextBuilder(algorithm);
     }
@@ -98,17 +98,17 @@ public final class SecurityFactory {
     // SaslServerFactory
     // ..[CRAM-MD5, DIGEST-MD5, GSSAPI, NTLM]
 
-    public static SecretKeyFactoryBuilder builder(SecretKeyFactoryAlgorithm algorithm)
+    public static SecretKeyFactoryBuilder builder(final SecretKeyFactoryAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new SecretKeyFactoryBuilder(algorithm);
     }
 
-    public static SecureRandomBuilder builder(SecureRandomAlgorithm algorithm)
+    public static SecureRandomBuilder builder(final SecureRandomAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new SecureRandomBuilder(algorithm);
     }
 
-    public static SignatureBuilder builder(SignatureAlgorithm algorithm)
+    public static SignatureBuilder builder(final SignatureAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new SignatureBuilder(algorithm);
     }
@@ -116,7 +116,7 @@ public final class SecurityFactory {
     // TerminalFactory
     // ..[PC/SC]
 
-    public static TrustManagerFactoryBuilder builder(TrustManagerFactoryAlgorithm algorithm)
+    public static TrustManagerFactoryBuilder builder(final TrustManagerFactoryAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         return new TrustManagerFactoryBuilder(algorithm);
     }

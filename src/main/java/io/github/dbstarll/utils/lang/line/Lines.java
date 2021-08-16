@@ -16,54 +16,171 @@ public class Lines extends LineIterator implements Iterable<String> {
 
     private final LineValidator lineValidator;
 
-    public Lines(Reader reader, LineValidator lineValidator) {
+    /**
+     * 构造Lines.
+     *
+     * @param reader        reader
+     * @param lineValidator 行校验器
+     */
+    public Lines(final Reader reader, final LineValidator lineValidator) {
         super(reader);
         this.lineValidator = lineValidator;
     }
 
-    public static Lines open(InputStream in, Charset cs, LineValidator lineValidator) {
+    /**
+     * 从输入流构造Lines.
+     *
+     * @param in            输入流
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     */
+    public static Lines open(final InputStream in, final Charset cs, final LineValidator lineValidator) {
         return new Lines(new InputStreamReader(in, cs), lineValidator);
     }
 
-    public static Lines open(File file, Charset cs, LineValidator lineValidator) throws IOException {
+    /**
+     * 从文件构造Lines.
+     *
+     * @param file          文件
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     * @throws IOException IO异常
+     */
+    public static Lines open(final File file, final Charset cs, final LineValidator lineValidator) throws IOException {
         return open(new FileInputStream(file), cs, lineValidator);
     }
 
-    public static Lines open(Class<?> cls, String resource, Charset cs, LineValidator lineValidator) throws IOException {
+    /**
+     * 从指定类的ClassLoader中的资源文件构造Lines.
+     *
+     * @param cls           资源加载类
+     * @param resource      资源名
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     */
+    public static Lines open(final Class<?> cls,
+                             final String resource,
+                             final Charset cs,
+                             final LineValidator lineValidator) {
         return open(cls.getResourceAsStream(resource), cs, lineValidator);
     }
 
-    public static Lines open(String resource, Charset cs, LineValidator lineValidator) throws IOException {
+    /**
+     * 从当前ClassLoader中的资源文件构造Lines.
+     *
+     * @param resource      资源名
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     */
+    public static Lines open(final String resource,
+                             final Charset cs,
+                             final LineValidator lineValidator) {
         return open(ClassLoader.getSystemResourceAsStream(resource), cs, lineValidator);
     }
 
-    public static Lines open(InputStream in, Bytes key, Charset cs, LineValidator lineValidator) throws IOException {
-        return open(EncryptInputStream.class.isInstance(in) ? in : new EncryptInputStream(in, key), cs, lineValidator);
+    /**
+     * 从加密的输入流构造Lines.
+     *
+     * @param in            输入流
+     * @param key           加密密钥
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     */
+    public static Lines open(final InputStream in,
+                             final Bytes key,
+                             final Charset cs,
+                             final LineValidator lineValidator) {
+        return open(in instanceof EncryptInputStream ? in : new EncryptInputStream(in, key), cs, lineValidator);
     }
 
-    public static Lines openGZip(InputStream in, Charset cs, LineValidator lineValidator) throws IOException {
-        return open(GZIPInputStream.class.isInstance(in) ? in : new GZIPInputStream(in), cs, lineValidator);
+    /**
+     * 从gzip压缩流构造Lines.
+     *
+     * @param in            输入流
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     * @throws IOException 解压缩异常
+     */
+    public static Lines openGZip(final InputStream in,
+                                 final Charset cs,
+                                 final LineValidator lineValidator) throws IOException {
+        return open(in instanceof GZIPInputStream ? in : new GZIPInputStream(in), cs, lineValidator);
     }
 
-    public static Lines openGZip(File file, Charset cs, LineValidator lineValidator) throws IOException {
+    /**
+     * 从gzip压缩文件构造Lines.
+     *
+     * @param file          压缩文件
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     * @throws IOException 解压缩异常
+     */
+    public static Lines openGZip(final File file,
+                                 final Charset cs,
+                                 final LineValidator lineValidator) throws IOException {
         return openGZip(new FileInputStream(file), cs, lineValidator);
     }
 
-    public static Lines openGZip(Class<?> cls, String resource, Charset cs, LineValidator lineValidator)
+
+    /**
+     * 从指定类的ClassLoader中的gzip资源文件构造Lines.
+     *
+     * @param cls           资源加载类
+     * @param resource      资源名
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     * @throws IOException 解压缩异常
+     */
+    public static Lines openGZip(final Class<?> cls,
+                                 final String resource,
+                                 final Charset cs,
+                                 final LineValidator lineValidator)
             throws IOException {
         return openGZip(cls.getResourceAsStream(resource), cs, lineValidator);
     }
 
-    public static Lines openGZip(String resource, Charset cs, LineValidator lineValidator) throws IOException {
+    /**
+     * 从当前ClassLoader中的gzip资源文件构造Lines.
+     *
+     * @param resource      资源名
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     * @throws IOException 解压缩异常
+     */
+    public static Lines openGZip(final String resource,
+                                 final Charset cs,
+                                 final LineValidator lineValidator) throws IOException {
         return openGZip(ClassLoader.getSystemResourceAsStream(resource), cs, lineValidator);
     }
 
-    public static Lines openGZip(InputStream in, Bytes key, Charset cs, LineValidator lineValidator) throws IOException {
-        return openGZip(EncryptInputStream.class.isInstance(in) ? in : new EncryptInputStream(in, key), cs, lineValidator);
+    /**
+     * 从加密的gzip输入流构造Lines.
+     *
+     * @param in            输入流
+     * @param key           加密密钥
+     * @param cs            字符集
+     * @param lineValidator 行校验器
+     * @return 指定的Lines
+     * @throws IOException 解压缩异常
+     */
+    public static Lines openGZip(final InputStream in,
+                                 final Bytes key,
+                                 final Charset cs,
+                                 final LineValidator lineValidator) throws IOException {
+        return openGZip(in instanceof EncryptInputStream ? in : new EncryptInputStream(in, key), cs, lineValidator);
     }
 
     @Override
-    protected final boolean isValidLine(String line) {
+    protected final boolean isValidLine(final String line) {
         return lineValidator == null || lineValidator.isValidLine(line);
     }
 

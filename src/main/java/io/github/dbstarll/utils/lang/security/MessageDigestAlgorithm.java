@@ -9,7 +9,7 @@ public enum MessageDigestAlgorithm {
         this(null);
     }
 
-    MessageDigestAlgorithm(String algorithm) {
+    MessageDigestAlgorithm(final String algorithm) {
         this.algorithm = algorithm;
     }
 

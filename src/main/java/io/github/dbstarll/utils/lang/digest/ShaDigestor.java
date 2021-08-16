@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 public class ShaDigestor extends AlgorithmDigestor {
     private final int strength;
 
-    public ShaDigestor(int strength) throws NoSuchAlgorithmException {
+    public ShaDigestor(final int strength) throws NoSuchAlgorithmException {
         super(EncryptUtils.ALGORITHM_SHA + "-" + strength);
         this.strength = strength;
     }

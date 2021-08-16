@@ -9,7 +9,7 @@ public enum SslContextAlgorithm {
         this(null);
     }
 
-    SslContextAlgorithm(String algorithm) {
+    SslContextAlgorithm(final String algorithm) {
         this.algorithm = algorithm;
     }
 

@@ -4,11 +4,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public final class SecureRandomBuilder extends AbstractSecurityBuilder<SecureRandom, SecureRandomAlgorithm> {
-    public SecureRandomBuilder(SecureRandomAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
+    public SecureRandomBuilder(final SecureRandomAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
         super(SecureRandom.class, algorithm);
     }
 
-    public SecureRandomBuilder seed(byte[] seed) {
+    public SecureRandomBuilder seed(final byte[] seed) {
         getType().setSeed(seed);
         return this;
     }

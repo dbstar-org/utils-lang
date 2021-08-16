@@ -32,8 +32,4 @@ public class TestEncryptFile extends TestCase {
         assertTrue(FileUtils.contentEquals(srcEncryptFile, destEncryptFileNoSuffix));
         EncryptFile.main(new String[]{"encryptedKey", destEncryptFileNoSuffix.getAbsolutePath()});
     }
-
-    public void testNew() {
-        new EncryptFile();
-    }
 }

@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public final class SecretKeyFactoryBuilder
         extends AbstractSecurityBuilder<SecretKeyFactory, SecretKeyFactoryAlgorithm> {
-    public SecretKeyFactoryBuilder(SecretKeyFactoryAlgorithm algorithm)
+    public SecretKeyFactoryBuilder(final SecretKeyFactoryAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         super(SecretKeyFactory.class, algorithm);
     }

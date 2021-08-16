@@ -15,14 +15,14 @@ public class MultiThreadLineOperateExecutor<E extends Comparable<E>> extends Lin
      * @param thread   并发线程数量
      * @param capacity 队列容量
      */
-    protected MultiThreadLineOperateExecutor(LineOperator<E> operator, int thread, int capacity) {
+    protected MultiThreadLineOperateExecutor(final LineOperator<E> operator, final int thread, final int capacity) {
         super(operator);
         this.executor = new ThreadPoolExecutor(thread, thread, 1, TimeUnit.MINUTES,
                 new LinkedBlockingQueue<Runnable>(capacity));
     }
 
-    public static <E extends Comparable<E>> MultiThreadLineOperateExecutor<E> build(LineOperator<E> operator, int thread,
-                                                                                    int capacity) {
+    public static <E extends Comparable<E>> MultiThreadLineOperateExecutor<E> build(final LineOperator<E> operator, final int thread,
+                                                                                    final int capacity) {
         return new MultiThreadLineOperateExecutor<E>(operator, thread, capacity);
     }
 

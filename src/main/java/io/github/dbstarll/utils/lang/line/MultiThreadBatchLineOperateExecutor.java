@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class MultiThreadBatchLineOperateExecutor<E extends Comparable<E>> extends BatchLineOperateExecutor<E> {
     private final ExecutorService executor;
 
-    protected MultiThreadBatchLineOperateExecutor(BatchLineOperator<E> operator, int batch, int thread, int capacity) {
+    protected MultiThreadBatchLineOperateExecutor(final BatchLineOperator<E> operator, final int batch, final int thread, final int capacity) {
         super(operator, batch);
         this.executor = new ThreadPoolExecutor(thread, thread, 1, TimeUnit.MINUTES,
                 new LinkedBlockingQueue<Runnable>(capacity));
@@ -25,13 +25,13 @@ public class MultiThreadBatchLineOperateExecutor<E extends Comparable<E>> extend
      * @param capacity the capacity of this queue
      * @return MultiThreadBatchLineOperateExecutor
      */
-    public static <E extends Comparable<E>> MultiThreadBatchLineOperateExecutor<E> build(BatchLineOperator<E> operator,
-                                                                                         int batch, int thread, int capacity) {
+    public static <E extends Comparable<E>> MultiThreadBatchLineOperateExecutor<E> build(final BatchLineOperator<E> operator,
+                                                                                         final int batch, final int thread, final int capacity) {
         return new MultiThreadBatchLineOperateExecutor<E>(operator, batch, thread, capacity);
     }
 
     @Override
-    protected void operate(String... lines) {
+    protected void operate(final String... lines) {
         final String[] batch = Arrays.copyOf(lines, lines.length);
         Runnable task = new Runnable() {
             @Override

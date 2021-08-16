@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public final class MessageDigestBuilder extends AbstractSecurityBuilder<MessageDigest, MessageDigestAlgorithm> {
-    public MessageDigestBuilder(MessageDigestAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
+    public MessageDigestBuilder(final MessageDigestAlgorithm algorithm) throws NoSuchAlgorithmException, InstanceException {
         super(MessageDigest.class, algorithm);
     }
 }

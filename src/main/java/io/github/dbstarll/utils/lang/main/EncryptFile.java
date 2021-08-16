@@ -8,46 +8,49 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
-public class EncryptFile {
-  private static final Logger LOGGER = LoggerFactory.getLogger(EncryptFile.class);
+public final class EncryptFile {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EncryptFile.class);
 
-  /**
-   * 加密输入的文件.
-   *
-   * @param args 命令行参数
-   * @throws Exception Exception
-   */
-  public static void main(final String[] args) throws Exception {
-      final String token = "-encrypt";
-      final Bytes encryptedKey = new Bytes(EncryptUtils.sha(args[0], 1));
+    private final Bytes encryptedKey;
 
-      encrypt(token, encryptedKey, new File(args[1]));
-  }
-
-    private static void encrypt(final String token, final Bytes encryptedKey, final File fileOriginal) throws IOException {
-        File fileEncrypt = getEncryptFile(token, fileOriginal);
-        InputStream in = null;
-        OutputStream out = null;
-        try {
-            in = new FileInputStream(fileOriginal);
-            out = new EncryptOutputStream(new FileOutputStream(fileEncrypt), encryptedKey);
-            IOUtils.copy(in, out);
-        } finally {
-            IOUtils.closeQuietly(in);
-            IOUtils.closeQuietly(out);
+    private EncryptFile(final Bytes encryptedKey) {
+        this.encryptedKey = encryptedKey;
     }
-    LOGGER.info("encrypt: {} ---> {}", fileOriginal.getName(), fileEncrypt.getName());
-  }
 
-  private static File getEncryptFile(final String token, final File fileOriginal) {
-    final File dRoot = fileOriginal.getParentFile();
-    final String originalName = StringUtils.substringBeforeLast(fileOriginal.getName(), ".");
-    final String suffix = StringUtils.substringAfterLast(fileOriginal.getName(), ".");
-    final String encryptName = originalName.endsWith(token)
-            ? originalName.substring(0, originalName.length() - token.length())
-            : originalName + token;
-    return new File(dRoot, encryptName + (StringUtils.isBlank(suffix) ? "" : "." + suffix));
-  }
+    /**
+     * 加密输入的文件.
+     *
+     * @param args 命令行参数
+     * @throws Exception Exception
+     */
+    public static void main(final String[] args) throws Exception {
+        final String token = "-encrypt";
+        final Bytes encryptedKey = new Bytes(EncryptUtils.sha(args[0], 1));
+
+        new EncryptFile(encryptedKey).encrypt(token, new File(args[1]));
+    }
+
+    private void encrypt(final String token, final File fileOriginal) throws Exception {
+        try (FileInputStream in = new FileInputStream(fileOriginal)) {
+            final File fileEncrypt = getEncryptFile(token, fileOriginal);
+            try (EncryptOutputStream out = new EncryptOutputStream(new FileOutputStream(fileEncrypt), encryptedKey)) {
+                IOUtils.copy(in, out);
+                LOGGER.info("encrypt: {} ---> {}", fileOriginal.getName(), fileEncrypt.getName());
+            }
+        }
+    }
+
+    private File getEncryptFile(final String token, final File fileOriginal) {
+        final File dRoot = fileOriginal.getParentFile();
+        final String originalName = StringUtils.substringBeforeLast(fileOriginal.getName(), ".");
+        final String suffix = StringUtils.substringAfterLast(fileOriginal.getName(), ".");
+        final String encryptName = originalName.endsWith(token)
+                ? originalName.substring(0, originalName.length() - token.length())
+                : originalName + token;
+        return new File(dRoot, encryptName + (StringUtils.isBlank(suffix) ? "" : "." + suffix));
+    }
 }

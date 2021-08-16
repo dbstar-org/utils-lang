@@ -7,12 +7,12 @@ import java.security.NoSuchAlgorithmException;
 
 public final class TrustManagerFactoryBuilder
         extends AbstractSecurityBuilder<TrustManagerFactory, TrustManagerFactoryAlgorithm> {
-    public TrustManagerFactoryBuilder(TrustManagerFactoryAlgorithm algorithm)
+    public TrustManagerFactoryBuilder(final TrustManagerFactoryAlgorithm algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         super(TrustManagerFactory.class, algorithm);
     }
 
-    public TrustManagerFactoryBuilder keyStore(KeyStore ks) throws KeyStoreException {
+    public TrustManagerFactoryBuilder keyStore(final KeyStore ks) throws KeyStoreException {
         getType().init(ks);
         return this;
     }
