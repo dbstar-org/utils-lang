@@ -24,13 +24,6 @@ public class TestLineUtils extends TestCase {
     private static final LineOperator<LineType> LINE_TYPE_OPERATOR = new LineTypeOperator();
 
     /**
-     * 测试{@link LineUtils#LineUtils()}.
-     */
-    public void testNew() {
-        new LineUtils();
-    }
-
-    /**
      * 测试 {@link LineUtils#operate(Iterable, LineOperator)}.
      *
      * @throws IOException IOException
