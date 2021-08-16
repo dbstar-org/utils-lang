@@ -13,7 +13,7 @@ public final class TrustManagerFactoryBuilder
     }
 
     public TrustManagerFactoryBuilder keyStore(KeyStore ks) throws KeyStoreException {
-        type.init(ks);
+        getType().init(ks);
         return this;
     }
 }

@@ -19,24 +19,24 @@ public class EncryptFile {
    * @param args 命令行参数
    * @throws Exception Exception
    */
-  public static void main(String[] args) throws Exception {
-    final String token = "-encrypt";
-    final Bytes encryptedKey = new Bytes(EncryptUtils.sha(args[0], 1));
+  public static void main(final String[] args) throws Exception {
+      final String token = "-encrypt";
+      final Bytes encryptedKey = new Bytes(EncryptUtils.sha(args[0], 1));
 
-    encrypt(token, encryptedKey, new File(args[1]));
+      encrypt(token, encryptedKey, new File(args[1]));
   }
 
-  private static void encrypt(final String token, Bytes encryptedKey, File fileOriginal) throws IOException {
-    File fileEncrypt = getEncryptFile(token, fileOriginal);
-    InputStream in = null;
-    OutputStream out = null;
-    try {
-      in = new FileInputStream(fileOriginal);
-      out = new EncryptOutputStream(new FileOutputStream(fileEncrypt), encryptedKey);
-      IOUtils.copy(in, out);
-    } finally {
-      IOUtils.closeQuietly(in);
-      IOUtils.closeQuietly(out);
+    private static void encrypt(final String token, final Bytes encryptedKey, final File fileOriginal) throws IOException {
+        File fileEncrypt = getEncryptFile(token, fileOriginal);
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            in = new FileInputStream(fileOriginal);
+            out = new EncryptOutputStream(new FileOutputStream(fileEncrypt), encryptedKey);
+            IOUtils.copy(in, out);
+        } finally {
+            IOUtils.closeQuietly(in);
+            IOUtils.closeQuietly(out);
     }
     LOGGER.info("encrypt: {} ---> {}", fileOriginal.getName(), fileEncrypt.getName());
   }

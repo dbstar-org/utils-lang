@@ -11,7 +11,7 @@ public final class MacBuilder extends AbstractSecurityBuilder<Mac, MacAlgorithm>
   }
 
   public MacBuilder key(Key key) throws InvalidKeyException {
-    type.init(key);
+    getType().init(key);
     return this;
   }
 }

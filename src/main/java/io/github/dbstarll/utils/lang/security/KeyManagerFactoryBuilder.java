@@ -15,7 +15,7 @@ public final class KeyManagerFactoryBuilder
 
     public KeyManagerFactoryBuilder keyStore(KeyStore ks, char[] password)
             throws UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException {
-        type.init(ks, password);
+        getType().init(ks, password);
         return this;
     }
 }

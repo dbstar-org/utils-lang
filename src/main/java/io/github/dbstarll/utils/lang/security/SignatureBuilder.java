@@ -9,17 +9,17 @@ public final class SignatureBuilder extends AbstractSecurityBuilder<Signature, S
     }
 
     public SignatureBuilder sign(PrivateKey privateKey, SecureRandom random) throws InvalidKeyException {
-        type.initSign(privateKey, random);
+        getType().initSign(privateKey, random);
         return this;
     }
 
     public SignatureBuilder verify(PublicKey publicKey) throws InvalidKeyException {
-        type.initVerify(publicKey);
+        getType().initVerify(publicKey);
         return this;
     }
 
     public SignatureBuilder verify(Certificate certificate) throws InvalidKeyException {
-        type.initVerify(certificate);
+        getType().initVerify(certificate);
         return this;
     }
 }

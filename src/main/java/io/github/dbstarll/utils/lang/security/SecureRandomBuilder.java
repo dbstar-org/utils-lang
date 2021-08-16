@@ -9,7 +9,7 @@ public final class SecureRandomBuilder extends AbstractSecurityBuilder<SecureRan
     }
 
     public SecureRandomBuilder seed(byte[] seed) {
-        type.setSeed(seed);
+        getType().setSeed(seed);
         return this;
     }
 }

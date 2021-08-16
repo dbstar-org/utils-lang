@@ -7,12 +7,12 @@ package io.github.dbstarll.utils.lang.bytes;
  */
 public class HexByteArrayConvertor implements ByteArrayConvertor {
     @Override
-    public byte[] toByteArray(String value) {
+    public byte[] toByteArray(final String value) {
         return BytesUtils.decodeHexString(value);
     }
 
     @Override
-    public String toString(byte[] value) {
+    public String toString(final byte[] value) {
         return BytesUtils.encodeHexString(value);
     }
 }

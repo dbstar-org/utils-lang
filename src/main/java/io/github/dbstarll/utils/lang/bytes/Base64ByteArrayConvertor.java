@@ -5,7 +5,7 @@ package io.github.dbstarll.utils.lang.bytes;
  *
  * @author dbstar
  */
-public class Base64ByteArrayConvertor implements ByteArrayConvertor {
+public final class Base64ByteArrayConvertor implements ByteArrayConvertor {
   private final boolean urlSafe;
 
   /**
@@ -15,17 +15,17 @@ public class Base64ByteArrayConvertor implements ByteArrayConvertor {
    *                characters. <b>Note: no padding is added when encoding using the URL-safe
    *                alphabet.</b>
    */
-  public Base64ByteArrayConvertor(boolean urlSafe) {
+  public Base64ByteArrayConvertor(final boolean urlSafe) {
     this.urlSafe = urlSafe;
   }
 
   @Override
-  public byte[] toByteArray(String value) {
+  public byte[] toByteArray(final String value) {
     return BytesUtils.decodeBase64String(value);
   }
 
   @Override
-  public String toString(byte[] value) {
+  public String toString(final byte[] value) {
     return BytesUtils.encodeBase64String(value, urlSafe);
   }
 }

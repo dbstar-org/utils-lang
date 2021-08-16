@@ -9,13 +9,6 @@ import java.util.Arrays;
 
 public class TestEncryptUtils extends TestCase {
     /**
-     * 测试{@link EncryptUtils#EncryptUtils()}.
-     */
-    public void testNew() {
-        new EncryptUtils();
-    }
-
-    /**
      * 测试{@link EncryptUtils#md5(byte[])}.
      *
      * @throws NoSuchAlgorithmException NoSuchAlgorithmException

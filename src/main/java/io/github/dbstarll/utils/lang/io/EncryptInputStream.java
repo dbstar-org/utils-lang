@@ -19,7 +19,7 @@ public class EncryptInputStream extends FilterInputStream {
      * @param in           输入流
      * @param encryptedKey 编码的key
      */
-    public EncryptInputStream(InputStream in, Bytes encryptedKey) {
+    public EncryptInputStream(final InputStream in, final Bytes encryptedKey) {
         super(in);
         this.encryptedKey = encryptedKey;
         this.position = 0;
@@ -32,12 +32,12 @@ public class EncryptInputStream extends FilterInputStream {
     }
 
     @Override
-    public int read(byte[] bt) throws IOException {
+    public int read(final byte[] bt) throws IOException {
         return read(bt, 0, bt.length);
     }
 
     @Override
-    public int read(byte[] bt, int off, int len) throws IOException {
+    public int read(final byte[] bt, final int off, final int len) throws IOException {
         int read = in.read(bt, off, len);
         if (read > 0) {
             position += EncryptUtils.encrypt(bt, off, read, encryptedKey, position);
@@ -46,14 +46,14 @@ public class EncryptInputStream extends FilterInputStream {
     }
 
     @Override
-    public long skip(long nb) throws IOException {
+    public long skip(final long nb) throws IOException {
         long lb = super.skip(nb);
         this.position += lb;
         return lb;
     }
 
     @Override
-    public synchronized void mark(int readlimit) {
+    public synchronized void mark(final int readlimit) {
         super.mark(readlimit);
         this.mark = this.position;
     }

@@ -29,11 +29,11 @@ public class LineOperateExecutor<E extends Comparable<E>> extends AbstractLineOp
         return count;
     }
 
-    protected void operate(String line) {
+    protected void operate(final String line) {
         try {
             countResult(operator.operate(line));
         } catch (Throwable ex) {
-            logger.warn("operate failed for line: " + line, ex);
+            getLogger().warn("operate failed for line: " + line, ex);
         }
     }
 }

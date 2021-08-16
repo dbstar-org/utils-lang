@@ -3,14 +3,14 @@ package io.github.dbstarll.utils.lang.security;
 import java.security.NoSuchAlgorithmException;
 
 public abstract class AbstractSecurityBuilder<T, A extends Enum<?>> implements SecurityBuilder<T> {
-    protected final T type;
+    private final T type;
 
-    protected AbstractSecurityBuilder(Class<T> typeClass, A algorithm)
+    protected AbstractSecurityBuilder(final Class<T> typeClass, final A algorithm)
             throws NoSuchAlgorithmException, InstanceException {
         this(typeClass, new AlgorithmInstancer<T, A>(algorithm, null));
     }
 
-    protected AbstractSecurityBuilder(Class<T> typeClass, Instancer<T> instancer)
+    protected AbstractSecurityBuilder(final Class<T> typeClass, final Instancer<T> instancer)
             throws NoSuchAlgorithmException, InstanceException {
         try {
             this.type = instancer.getInstance(typeClass);
@@ -21,6 +21,10 @@ public abstract class AbstractSecurityBuilder<T, A extends Enum<?>> implements S
                 throw new InstanceException("getInstance failed for: " + typeClass.getName(), ex);
             }
         }
+    }
+
+    protected final T getType() {
+        return type;
     }
 
     @Override

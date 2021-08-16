@@ -6,14 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractLauncher<E> implements Task {
+    /**
+     * map of tasks with token.
+     */
     private final Map<String, Class<? extends E>> tasks = new HashMap<String, Class<? extends E>>();
 
-    protected final void addTask(String token, Class<? extends E> taskClass) {
+    protected final void addTask(final String token, final Class<? extends E> taskClass) {
         tasks.put(token, taskClass);
     }
 
     @Override
-    public final int run(String... args) throws Throwable {
+    public final int run(final String... args) throws Throwable {
         if (ArrayUtils.isEmpty(args)) {
             throw new IllegalArgumentException("Need task token.");
         }

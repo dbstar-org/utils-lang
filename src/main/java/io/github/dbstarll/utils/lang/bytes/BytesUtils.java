@@ -12,6 +12,14 @@ import java.util.BitSet;
  * @author dbstar
  */
 public final class BytesUtils {
+    private static final int BYTE_MASK = 0xff;
+    private static final int BYTE_MAX = 0x07f;
+    private static final int BYTE_MIN = 0x80;
+
+    private BytesUtils() {
+        //隐藏构造器.
+    }
+
     /**
      * 字节数组比较.
      *
@@ -24,7 +32,8 @@ public final class BytesUtils {
      * @return a negative integer, zero, or a positive integer as buffer1 is less than, equal to, or
      * greater than buffer2.
      */
-    public static int compare(byte[] bs1, int off1, int len1, byte[] bs2, int off2, int len2) {
+    public static int compare(final byte[] bs1, final int off1, final int len1,
+                              final byte[] bs2, final int off2, final int len2) {
         // Short circuit equal case
         if (bs1 == bs2 && off1 == off2 && len1 == len2) {
             return 0;
@@ -33,8 +42,8 @@ public final class BytesUtils {
         int end1 = off1 + len1;
         int end2 = off2 + len2;
         for (int i = off1, j = off2; i < end1 && j < end2; i++, j++) {
-            int bytea = bs1[i] & 0xff;
-            int byteb = bs2[j] & 0xff;
+            int bytea = bs1[i] & BYTE_MASK;
+            int byteb = bs2[j] & BYTE_MASK;
             if (bytea != byteb) {
                 return bytea - byteb;
             }
@@ -48,10 +57,10 @@ public final class BytesUtils {
      * @param bt 待转换的byte
      * @return 转换后的无符号整数 
      */
-    public static int byte2int(byte bt) {
-        int lb = bt & 0x07f;
+    public static int byte2int(final byte bt) {
+        int lb = bt & BYTE_MAX;
         if (bt < 0) {
-            lb |= 0x80;
+            lb |= BYTE_MIN;
         }
         return lb;
     }

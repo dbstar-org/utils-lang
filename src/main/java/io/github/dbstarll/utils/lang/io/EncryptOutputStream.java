@@ -19,24 +19,24 @@ public class EncryptOutputStream extends FilterOutputStream {
      * @param out          输出流
      * @param encryptedKey 编码的key
      */
-    public EncryptOutputStream(OutputStream out, Bytes encryptedKey) {
+    public EncryptOutputStream(final OutputStream out, final Bytes encryptedKey) {
         super(out);
         this.encryptedKey = encryptedKey;
         this.position = 0;
     }
 
     @Override
-    public void write(int bt) throws IOException {
+    public void write(final int bt) throws IOException {
         out.write(BytesUtils.byte2int(EncryptUtils.getEncryptedByte((byte) bt, encryptedKey, position++)));
     }
 
     @Override
-    public void write(byte[] bt) throws IOException {
+    public void write(final byte[] bt) throws IOException {
         write(bt, 0, bt.length);
     }
 
     @Override
-    public void write(byte[] bt, int off, int len) throws IOException {
+    public void write(final byte[] bt, final int off, final int len) throws IOException {
         byte[] dst = Arrays.copyOfRange(bt, off, off + len);
         position += EncryptUtils.encrypt(dst, 0, dst.length, encryptedKey, position);
         out.write(dst, 0, dst.length);

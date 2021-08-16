@@ -13,7 +13,7 @@ public final class SslContextBuilder extends AbstractSecurityBuilder<SSLContext,
     }
 
     public SslContextBuilder init(KeyManager[] km, TrustManager[] tm, SecureRandom random) throws KeyManagementException {
-        type.init(km, tm, random);
+        getType().init(km, tm, random);
         return this;
     }
 }

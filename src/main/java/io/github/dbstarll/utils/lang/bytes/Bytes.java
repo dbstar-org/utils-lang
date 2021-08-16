@@ -22,7 +22,7 @@ public class Bytes implements Comparable<Bytes> {
      *
      * @param data the array to be copied
      */
-    public Bytes(byte[] data) {
+    public Bytes(final byte[] data) {
         this.data = data == null ? null : Arrays.copyOf(data, data.length);
         this.length = this.data == null ? -1 : this.data.length;
         this.hash = Arrays.hashCode(this.data);
@@ -38,7 +38,8 @@ public class Bytes implements Comparable<Bytes> {
      * @throws IllegalArgumentException       if <tt>from &gt; to</tt>
      * @throws ArrayIndexOutOfBoundsException if {@code from < 0} or {@code from > data.length}
      */
-    public Bytes(byte[] data, int from, int to) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
+    public Bytes(final byte[] data, final int from, final int to)
+            throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
         this.data = data == null ? null : Arrays.copyOfRange(data, from, to);
         this.length = this.data == null ? -1 : this.data.length;
         this.hash = Arrays.hashCode(this.data);
@@ -49,7 +50,7 @@ public class Bytes implements Comparable<Bytes> {
      *
      * @param data the string bytes to be set
      */
-    public Bytes(String data) {
+    public Bytes(final String data) {
         this.data = data == null ? null : data.getBytes(StandardCharsets.UTF_8);
         this.length = this.data == null ? -1 : this.data.length;
         this.hash = Arrays.hashCode(this.data);
@@ -72,7 +73,7 @@ public class Bytes implements Comparable<Bytes> {
      * @throws NullPointerException           如果封装的byte数组为null
      * @throws ArrayIndexOutOfBoundsException if {@code from < 0} or {@code from > data.length}
      */
-    public final byte get(int index) throws NullPointerException, ArrayIndexOutOfBoundsException {
+    public final byte get(final int index) throws NullPointerException, ArrayIndexOutOfBoundsException {
         return data[index];
     }
 
@@ -91,7 +92,7 @@ public class Bytes implements Comparable<Bytes> {
     }
 
     @Override
-    public final boolean equals(Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         } else if (obj == null) {
@@ -104,7 +105,7 @@ public class Bytes implements Comparable<Bytes> {
     }
 
     @Override
-    public int compareTo(Bytes other) {
+    public final int compareTo(final Bytes other) {
         if (data == null) {
             return other.data == null ? 0 : -1;
         } else if (other.data == null) {

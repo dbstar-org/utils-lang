@@ -12,7 +12,7 @@ public final class KeyPairGeneratorBuilder
     }
 
     public KeyPairGeneratorBuilder keySize(int keysize, SecureRandom random) {
-        type.initialize(keysize, random);
+        getType().initialize(keysize, random);
         return this;
     }
 }

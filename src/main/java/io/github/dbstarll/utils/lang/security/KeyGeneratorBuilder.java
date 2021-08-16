@@ -10,7 +10,7 @@ public final class KeyGeneratorBuilder extends AbstractSecurityBuilder<KeyGenera
   }
 
   public KeyGeneratorBuilder keySize(int keysize, SecureRandom random) {
-    type.init(keysize, random);
+    getType().init(keysize, random);
     return this;
   }
 }

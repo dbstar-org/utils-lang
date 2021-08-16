@@ -13,7 +13,7 @@ public final class KeyStoreBuilder extends AbstractSecurityBuilder<KeyStore, Key
 
     public KeyStoreBuilder load(InputStream stream, char[] password)
             throws NoSuchAlgorithmException, CertificateException, IOException {
-        type.load(stream, password);
+        getType().load(stream, password);
         return this;
     }
 }

@@ -8,13 +8,6 @@ import java.util.BitSet;
 
 public class TestBytesUtils extends TestCase {
     /**
-     * 测试{@link BytesUtils#BytesUtils()}.
-     */
-    public void testNew() {
-        new BytesUtils();
-    }
-
-    /**
      * 测试{@link BytesUtils#compare(byte[], int, int, byte[], int, int)}.
      */
     public void testCompare() {
