@@ -1,15 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>io.github.dbstarll.parent</groupId>
     <artifactId>base</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.4</version>
   </parent>
   <groupId>io.github.dbstarll.utils</groupId>
   <artifactId>utils-lang</artifactId>
   <version>1.0.4-SNAPSHOT</version>
 
+  <name>utils-lang</name>
   <description>commons lang utils</description>
   <url>https://github.com/dbstarll/utils-lang</url>
 
@@ -41,7 +43,7 @@
       </activation>
       <properties>
         <version.junit>4.13.2</version.junit>
-        <version.surefire-junit47>3.0.0-M5</version.surefire-junit47>
+        <version.surefire-junit47>3.0.0-M7</version.surefire-junit47>
       </properties>
       <dependencies>
         <dependency>
