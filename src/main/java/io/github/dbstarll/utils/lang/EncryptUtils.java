@@ -72,14 +72,6 @@ public final class EncryptUtils {
             data[i] = (byte) (data[i] ^ bs[pos++ % keyLen]);
         }
 
-        // other impl
-        // final int pos = (keyLen - (int) (position % keyLen)) % keyLen;
-        // for (int i = 0; i < keyLen; i++) {
-        // byte encryptByte = bs[i];
-        // for (int j = offset + (i + pos) % keyLen; j < end; j += keyLen) {
-        // data[j] = (byte) (data[j] ^ encryptByte);
-        // }
-        // }
         return length;
     }
 

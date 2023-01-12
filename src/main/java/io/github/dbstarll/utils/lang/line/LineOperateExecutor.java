@@ -47,10 +47,6 @@ public class LineOperateExecutor<E extends Comparable<E>> extends AbstractLineOp
      * @param line 单行数据
      */
     protected void operate(final String line) {
-        try {
-            countResult(operator.operate(line));
-        } catch (Throwable ex) {
-            getLogger().warn("operate failed for line: " + line, ex);
-        }
+        countResult(operator.operate(line));
     }
 }

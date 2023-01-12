@@ -72,7 +72,7 @@ public class TestTaskLauncher extends TestCase {
 
     public static class MockOkTask implements Task {
         @Override
-        public int run(String... args) throws Exception {
+        public int run(String... args) {
             sign.set(Integer.parseInt(args[0]));
             return sign.get();
         }
@@ -84,7 +84,7 @@ public class TestTaskLauncher extends TestCase {
         }
 
         @Override
-        public int run(String... args) throws Exception {
+        public int run(String... args) {
             sign.set(Integer.parseInt(args[0]));
             return sign.get();
         }

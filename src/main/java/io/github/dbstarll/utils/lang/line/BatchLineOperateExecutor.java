@@ -59,12 +59,8 @@ public class BatchLineOperateExecutor<E extends Comparable<E>> extends AbstractL
      * @param lines 多行数据
      */
     protected void operate(final String... lines) {
-        try {
-            for (E result : operator.operate(lines)) {
-                countResult(result);
-            }
-        } catch (Throwable ex) {
-            getLogger().warn("operate failed for lines: " + Arrays.toString(lines), ex);
+        for (E result : operator.operate(lines)) {
+            countResult(result);
         }
     }
 }

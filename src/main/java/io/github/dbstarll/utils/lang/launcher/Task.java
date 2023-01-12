@@ -6,7 +6,6 @@ public interface Task {
      *
      * @param args command specific arguments.
      * @return exit code.
-     * @throws Throwable Exception
      */
-    int run(String... args) throws Throwable;
+    int run(String... args);
 }

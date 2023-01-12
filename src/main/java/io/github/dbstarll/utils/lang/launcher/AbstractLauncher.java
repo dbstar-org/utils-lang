@@ -16,7 +16,7 @@ public abstract class AbstractLauncher<E> implements Task {
     }
 
     @Override
-    public final int run(final String... args) throws Throwable {
+    public final int run(final String... args) {
         if (ArrayUtils.isEmpty(args)) {
             throw new IllegalArgumentException("Need task token.");
         }
@@ -34,5 +34,5 @@ public abstract class AbstractLauncher<E> implements Task {
         }
     }
 
-    protected abstract int run(Class<? extends E> taskClass, String... args) throws LaunchException, Throwable;
+    protected abstract int run(Class<? extends E> taskClass, String... args) throws LaunchException;
 }
