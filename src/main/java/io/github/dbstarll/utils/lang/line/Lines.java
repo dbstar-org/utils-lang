@@ -2,6 +2,7 @@ package io.github.dbstarll.utils.lang.line;
 
 import io.github.dbstarll.utils.lang.bytes.Bytes;
 import io.github.dbstarll.utils.lang.io.EncryptInputStream;
+import io.github.dbstarll.utils.lang.wrapper.IterableWrapper;
 import org.apache.commons.io.LineIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -186,7 +187,7 @@ public class Lines extends LineIterator implements Iterable<String> {
 
     @Override
     public final Iterator<String> iterator() {
-        return this;
+        return IterableWrapper.wrap(this).iterator();
     }
 
     @Override
