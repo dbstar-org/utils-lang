@@ -14,7 +14,7 @@ public abstract class MainLauncher extends AbstractLauncher<Object> {
         }
 
         try {
-            method.invoke(null, new Object[]{args});
+            method.invoke(taskClass, new Object[]{args});
         } catch (InvocationTargetException ex) {
             throw ex.getTargetException();
         } catch (Throwable ex) {
