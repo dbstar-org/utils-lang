@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class TestEncryptUtils extends TestCase {
@@ -19,7 +20,7 @@ public class TestEncryptUtils extends TestCase {
         byte[] bt = new byte[]{1, 2, 3, 4};
         byte[] e1 = EncryptUtils.md5(bt);
         byte[] e2 = EncryptUtils.md5(bt);
-        assertTrue(Arrays.equals(e1, e2));
+        assertArrayEquals(e1, e2);
         assertNotSame(e1, e2);
     }
 
@@ -32,7 +33,7 @@ public class TestEncryptUtils extends TestCase {
         byte[] bt = new byte[]{1, 2, 3, 4};
         byte[] e1 = EncryptUtils.sha(bt, 1);
         byte[] e2 = EncryptUtils.sha(bt, 1);
-        assertTrue(Arrays.equals(e1, e2));
+        assertArrayEquals(e1, e2);
         assertNotSame(e1, e2);
     }
 
@@ -45,7 +46,7 @@ public class TestEncryptUtils extends TestCase {
         String str = "testSha1String";
         byte[] e1 = EncryptUtils.sha(str, 1);
         byte[] e2 = EncryptUtils.sha(str, 1);
-        assertTrue(Arrays.equals(e1, e2));
+        assertArrayEquals(e1, e2);
         assertNotSame(e1, e2);
 
         try {
@@ -92,12 +93,12 @@ public class TestEncryptUtils extends TestCase {
         assertNotSame(b1, b2);
 
         // same for same key
-        assertTrue(Arrays.equals(b2, EncryptUtils.encryptCopy(b1, key)));
-        assertTrue(Arrays.equals(b2, EncryptUtils.encryptCopy(b1, key)));
+        assertArrayEquals(b2, EncryptUtils.encryptCopy(b1, key));
+        assertArrayEquals(b2, EncryptUtils.encryptCopy(b1, key));
 
         // same fot Encrypt twice
         byte[] b3 = EncryptUtils.encryptCopy(b2, key);
-        assertTrue(Arrays.equals(b1, b3));
+        assertArrayEquals(b1, b3);
         assertNotSame(b1, b3);
 
         // null
@@ -120,7 +121,7 @@ public class TestEncryptUtils extends TestCase {
 
         // same fot Encrypt twice
         byte[] b3 = EncryptUtils.encryptReplace(b2, key);
-        assertTrue(Arrays.equals(b1, EncryptUtils.sha("NoSuchAlgorithmException", 256)));
+        assertArrayEquals(b1, EncryptUtils.sha("NoSuchAlgorithmException", 256));
         assertSame(b1, b3);
 
         // null

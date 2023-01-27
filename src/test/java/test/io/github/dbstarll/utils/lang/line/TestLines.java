@@ -51,10 +51,8 @@ public class TestLines extends TestCase {
 
     /**
      * 测试{@link Lines#open(String, java.nio.charset.Charset, LineValidator)}.
-     *
-     * @throws IOException IOException
      */
-    public void testOpenSystemResource() throws IOException {
+    public void testOpenSystemResource() {
         assertEquals(6, read(Lines.open("lines.txt", StandardCharsets.UTF_8, null)));
     }
 
@@ -70,9 +68,8 @@ public class TestLines extends TestCase {
     /**
      * 测试{@link Lines#open(Class, String, java.nio.charset.Charset, LineValidator)}.
      *
-     * @throws IOException IOException
      */
-    public void testOpenResource() throws IOException {
+    public void testOpenResource() {
         assertEquals(4, read(
                 Lines.open(TestLines.class, "/lines.txt", StandardCharsets.UTF_8, LineValidator.NOT_BLANK)));
     }
@@ -90,9 +87,8 @@ public class TestLines extends TestCase {
     /**
      * 测试{@link Lines#open(java.io.InputStream, Bytes, java.nio.charset.Charset, LineValidator)}.
      *
-     * @throws IOException IOException
      */
-    public void testOpenEncrypted() throws IOException {
+    public void testOpenEncrypted() {
         assertEquals(6, read(Lines.open(ClassLoader.getSystemResourceAsStream("lines-encrypt.txt"),
                 encryptedKey, StandardCharsets.UTF_8, LineValidator.ALL)));
     }

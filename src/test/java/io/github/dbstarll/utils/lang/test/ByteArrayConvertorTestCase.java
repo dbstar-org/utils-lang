@@ -4,7 +4,7 @@ import io.github.dbstarll.utils.lang.bytes.ByteArrayConvertor;
 import junit.framework.TestCase;
 import org.apache.commons.lang3.RandomUtils;
 
-import java.util.Arrays;
+import static org.junit.Assert.assertArrayEquals;
 
 public abstract class ByteArrayConvertorTestCase extends TestCase {
     protected ByteArrayConvertor convertor;
@@ -48,7 +48,7 @@ public abstract class ByteArrayConvertorTestCase extends TestCase {
      * 测试{@link ByteArrayConvertor#toByteArray(String)}对空字符串的处理.
      */
     public void testToByteArrayEmpty() {
-        assertTrue(Arrays.equals(new byte[0], convertor.toByteArray("")));
+        assertArrayEquals(new byte[0], convertor.toByteArray(""));
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class ByteArrayConvertorTestCase extends TestCase {
         assertNotNull(str);
 
         byte[] bts2 = convertor.toByteArray(str);
-        assertTrue(Arrays.equals(bts, bts2));
+        assertArrayEquals(bts, bts2);
         assertNotSame(bts, bts2);
 
         String str2 = convertor.toString(bts2);

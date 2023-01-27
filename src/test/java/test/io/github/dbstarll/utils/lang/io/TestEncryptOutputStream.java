@@ -10,6 +10,8 @@ import org.apache.commons.lang3.RandomUtils;
 import java.io.*;
 import java.util.Arrays;
 
+import static org.junit.Assert.assertArrayEquals;
+
 public class TestEncryptOutputStream extends TestCase {
     private Bytes encryptedKey;
 
@@ -52,6 +54,6 @@ public class TestEncryptOutputStream extends TestCase {
         assertFalse(Arrays.equals(encryptData, encryptData2));
         assertEquals(encryptData.length, encryptData2.length);
 
-        assertTrue(Arrays.equals(data, encryptData2));
+        assertArrayEquals(data, encryptData2);
     }
 }

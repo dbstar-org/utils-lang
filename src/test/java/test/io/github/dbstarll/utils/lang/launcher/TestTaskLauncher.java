@@ -24,10 +24,8 @@ public class TestTaskLauncher extends TestCase {
 
     /**
      * 测试任务执行.
-     *
-     * @throws Throwable Exception
      */
-    public void testRun() throws Throwable {
+    public void testRun() {
         Launcher launcher = new Launcher();
         launcher.addMainTask("token", MockOkTask.class);
 
@@ -49,9 +47,8 @@ public class TestTaskLauncher extends TestCase {
     /**
      * 测试任务执行异常.
      *
-     * @throws Throwable Exception
      */
-    public void testRunFailed() throws Throwable {
+    public void testRunFailed() {
         Launcher launcher = new Launcher();
         launcher.addMainTask("token", MockErrorTask.class);
 

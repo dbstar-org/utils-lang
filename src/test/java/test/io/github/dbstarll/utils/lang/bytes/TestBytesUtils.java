@@ -3,7 +3,7 @@ package test.io.github.dbstarll.utils.lang.bytes;
 import io.github.dbstarll.utils.lang.bytes.BytesUtils;
 import junit.framework.TestCase;
 
-import java.util.Arrays;
+import static org.junit.Assert.assertArrayEquals;
 
 public class TestBytesUtils extends TestCase {
     /**
@@ -41,8 +41,8 @@ public class TestBytesUtils extends TestCase {
     public void testHexString() {
         byte[] bt = new byte[]{0, 1, 64, 127, -128, -64, -2, -1};
         assertEquals("0001407f80c0feff", BytesUtils.encodeHexString(bt));
-        assertTrue(Arrays.equals(bt, BytesUtils.decodeHexString("0001407f80c0feff")));
-        assertTrue(Arrays.equals(bt, BytesUtils.decodeHexString("0001407F80C0FEFF")));
+        assertArrayEquals(bt, BytesUtils.decodeHexString("0001407f80c0feff"));
+        assertArrayEquals(bt, BytesUtils.decodeHexString("0001407F80C0FEFF"));
 
         assertNull(BytesUtils.encodeHexString(null));
         assertNull(BytesUtils.decodeHexString(null));
@@ -69,8 +69,8 @@ public class TestBytesUtils extends TestCase {
         byte[] bt = new byte[]{0, 1, 64, 127, -128, -64, -2, -1};
         assertEquals("AAFAf4DA/v8=", BytesUtils.encodeBase64String(bt, false));
         assertEquals("AAFAf4DA_v8", BytesUtils.encodeBase64String(bt, true));
-        assertTrue(Arrays.equals(bt, BytesUtils.decodeBase64String("AAFAf4DA/v8=")));
-        assertTrue(Arrays.equals(bt, BytesUtils.decodeBase64String("AAFAf4DA_v8")));
+        assertArrayEquals(bt, BytesUtils.decodeBase64String("AAFAf4DA/v8="));
+        assertArrayEquals(bt, BytesUtils.decodeBase64String("AAFAf4DA_v8"));
 
         assertNull(BytesUtils.encodeBase64String(null, false));
         assertNull(BytesUtils.encodeBase64String(null, true));

@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class TestBytes extends TestCase {
@@ -18,7 +19,7 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayNormal() {
         byte[] data = new byte[]{1, 2, 3};
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data, bytes.get()));
+        assertArrayEquals(data, bytes.get());
         assertNotSame(data, bytes.get());
         assertEquals(3, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
@@ -30,7 +31,7 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayNull() {
         byte[] data = null;
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data, bytes.get()));
+        assertArrayEquals(data, bytes.get());
         assertNull(bytes.get());
         assertEquals(-1, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
@@ -42,8 +43,8 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayEmpty() {
         byte[] data = new byte[]{};
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data, bytes.get()));
-        assertFalse(data == bytes.get());
+        assertArrayEquals(data, bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(0, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
     }
@@ -54,7 +55,7 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayRangeNormal() {
         byte[] data = new byte[]{1, 2, 3};
         Bytes bytes = new Bytes(data, 0, data.length);
-        assertTrue(Arrays.equals(data, bytes.get()));
+        assertArrayEquals(data, bytes.get());
         assertNotSame(data, bytes.get());
         assertEquals(3, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
@@ -66,7 +67,7 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayRangeNull() {
         byte[] data = null;
         Bytes bytes = new Bytes(data, 0, 10);
-        assertTrue(Arrays.equals(data, bytes.get()));
+        assertArrayEquals(data, bytes.get());
         assertNull(bytes.get());
         assertEquals(-1, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
@@ -78,8 +79,8 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayRangeEmpty() {
         byte[] data = new byte[]{};
         Bytes bytes = new Bytes(data, 0, 0);
-        assertTrue(Arrays.equals(data, bytes.get()));
-        assertFalse(data == bytes.get());
+        assertArrayEquals(data, bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(0, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
     }
@@ -118,7 +119,7 @@ public class TestBytes extends TestCase {
     public void testCreateByStringNormal() {
         String data = "123";
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data.getBytes(StandardCharsets.UTF_8), bytes.get()));
+        assertArrayEquals(data.getBytes(StandardCharsets.UTF_8), bytes.get());
         assertEquals(3, bytes.length());
         assertEquals(Arrays.hashCode(data.getBytes(StandardCharsets.UTF_8)), bytes.hashCode());
     }
@@ -140,7 +141,7 @@ public class TestBytes extends TestCase {
     public void testCreateByStringEmpty() {
         String data = "";
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data.getBytes(StandardCharsets.UTF_8), bytes.get()));
+        assertArrayEquals(data.getBytes(StandardCharsets.UTF_8), bytes.get());
         assertEquals(0, bytes.length());
         assertEquals(Arrays.hashCode(data.getBytes(StandardCharsets.UTF_8)), bytes.hashCode());
     }
@@ -165,7 +166,7 @@ public class TestBytes extends TestCase {
     public void testGetNormalSub() {
         byte[] data = new byte[]{1, 2, 3, 4};
         Bytes bytes = new Bytes(data, 1, 3);
-        assertFalse(data == bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(2, bytes.length());
         assertEquals(data[1], bytes.get(0));
         assertEquals(data[2], bytes.get(1));

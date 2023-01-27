@@ -5,7 +5,8 @@ import junit.framework.TestCase;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
+
+import static org.junit.Assert.assertArrayEquals;
 
 public abstract class DigestorTestCase extends TestCase {
     private Digestor digestor;
@@ -32,7 +33,7 @@ public abstract class DigestorTestCase extends TestCase {
         byte[] d1 = digestor.digest(data);
         byte[] d2 = digestor.digest(data);
         assertNotSame(d1, d2);
-        assertTrue(Arrays.equals(d1, d2));
+        assertArrayEquals(d1, d2);
 
         assertNotNull(digestor.toString());
     }

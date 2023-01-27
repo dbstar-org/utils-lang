@@ -24,10 +24,8 @@ public class TestMainLauncher extends TestCase {
 
     /**
      * 测试{@link AbstractLauncher#run(String[])}在无参数时抛出异常.
-     *
-     * @throws Throwable Exception
      */
-    public void testNullParams() throws Throwable {
+    public void testNullParams() {
         Launcher launcher = new Launcher();
 
         try {
@@ -48,9 +46,8 @@ public class TestMainLauncher extends TestCase {
     /**
      * 测试{@link AbstractLauncher#run(String[])}在无对应任务时抛出异常.
      *
-     * @throws Throwable Exception
      */
-    public void testNoMatchToken() throws Throwable {
+    public void testNoMatchToken() {
         Launcher launcher = new Launcher();
 
         try {
@@ -64,9 +61,8 @@ public class TestMainLauncher extends TestCase {
     /**
      * 测试任务执行.
      *
-     * @throws Throwable Exception
      */
-    public void testRun() throws Throwable {
+    public void testRun() {
         Launcher launcher = new Launcher();
         launcher.addMainTask("token", MockOkTask.class);
 
@@ -88,9 +84,8 @@ public class TestMainLauncher extends TestCase {
     /**
      * 测试任务执行异常.
      *
-     * @throws Throwable Exception
      */
-    public void testRunFailed() throws Throwable {
+    public void testRunFailed() {
         Launcher launcher = new Launcher();
         launcher.addMainTask("main", MockErrorNoMainTask.class);
         launcher.addMainTask("access", MockErrorAccessTask.class);
