@@ -7,7 +7,7 @@ public abstract class AbstractSecurityBuilder<T, A extends Enum<?>> implements S
 
     protected AbstractSecurityBuilder(final Class<T> typeClass, final A algorithm)
             throws NoSuchAlgorithmException, InstanceException {
-        this(typeClass, new AlgorithmInstancer<T, A>(algorithm, null));
+        this(typeClass, new AlgorithmInstancer<>(algorithm, null));
     }
 
     protected AbstractSecurityBuilder(final Class<T> typeClass, final Instancer<T> instancer)

@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 
 import java.util.Map.Entry;
 
+import static org.junit.Assert.assertNotEquals;
+
 public class TestEntryWrapper extends TestCase {
     /**
      * 测试{@link EntryWrapper#wrap(Object, Object)}.
@@ -14,8 +16,8 @@ public class TestEntryWrapper extends TestCase {
         final String value = "value";
         EntryWrapper<String, String> entry = EntryWrapper.wrap(key, value);
 
-        assertTrue(key == entry.getKey());
-        assertTrue(value == entry.getValue());
+        assertSame(key, entry.getKey());
+        assertSame(value, entry.getValue());
     }
 
     /**
@@ -48,7 +50,7 @@ public class TestEntryWrapper extends TestCase {
      * 测试{@link EntryWrapper#hashCode()}.
      */
     public void testHash() {
-        assertTrue(EntryWrapper.wrap("key", "value").hashCode() != 0);
+        assertNotEquals(EntryWrapper.wrap("key", "value").hashCode(), 0);
         assertEquals(EntryWrapper.wrap("key", "value").hashCode(),
                 EntryWrapper.wrap("key", "value").hashCode());
         assertEquals(EntryWrapper.wrap("key", null).hashCode(),
@@ -69,16 +71,16 @@ public class TestEntryWrapper extends TestCase {
         assertEquals(EntryWrapper.wrap(null, null), EntryWrapper.wrap(null, null));
 
         Entry<String, String> entry = EntryWrapper.wrap("key", "value");
-        assertTrue(entry.equals(entry));
-        assertFalse(entry.equals(null));
-        assertFalse(entry.equals("entry"));
+        assertEquals(entry, entry);
+        assertNotEquals(entry, null);
+        assertNotEquals(entry, "entry");
 
-        assertFalse(EntryWrapper.wrap("key", "value").equals(EntryWrapper.wrap(null, "value")));
-        assertFalse(EntryWrapper.wrap(null, "value").equals(EntryWrapper.wrap("key", "value")));
-        assertFalse(EntryWrapper.wrap("key", "value").equals(EntryWrapper.wrap("key1", "value")));
-        assertFalse(EntryWrapper.wrap("key", "value").equals(EntryWrapper.wrap("key", null)));
-        assertFalse(EntryWrapper.wrap("key", null).equals(EntryWrapper.wrap("key", "value")));
-        assertFalse(EntryWrapper.wrap("key", "value").equals(EntryWrapper.wrap("key", "value1")));
+        assertNotEquals(EntryWrapper.wrap("key", "value"), EntryWrapper.wrap(null, "value"));
+        assertNotEquals(EntryWrapper.wrap(null, "value"), EntryWrapper.wrap("key", "value"));
+        assertNotEquals(EntryWrapper.wrap("key", "value"), EntryWrapper.wrap("key1", "value"));
+        assertNotEquals(EntryWrapper.wrap("key", "value"), EntryWrapper.wrap("key", null));
+        assertNotEquals(EntryWrapper.wrap("key", null), EntryWrapper.wrap("key", "value"));
+        assertNotEquals(EntryWrapper.wrap("key", "value"), EntryWrapper.wrap("key", "value1"));
     }
 
     /**

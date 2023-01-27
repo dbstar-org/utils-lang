@@ -6,7 +6,7 @@ public interface Instancer<T> {
      *
      * @param typeClass 待实例的类
      * @return 指定类的实例
-     * @throws Exception 创建实例异常
+     * @throws InstanceException 创建实例异常
      */
-    T getInstance(Class<T> typeClass) throws Exception;
+    T getInstance(Class<T> typeClass) throws InstanceException;
 }

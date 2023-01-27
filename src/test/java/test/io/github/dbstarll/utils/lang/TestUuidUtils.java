@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 
 import java.util.UUID;
 
+import static org.junit.Assert.assertNotEquals;
+
 public class TestUuidUtils extends TestCase {
   /**
    * 测试{@link UuidUtils#randomUuid()}.
@@ -12,8 +14,8 @@ public class TestUuidUtils extends TestCase {
   public void testRandomUuid() {
     UUID u1 = UuidUtils.randomUuid();
     UUID u2 = UuidUtils.randomUuid();
-    assertFalse(u1.equals(u2));
-    assertFalse(u1 == u2);
+    assertNotEquals(u1, u2);
+    assertNotSame(u1, u2);
   }
 
   /**
@@ -23,8 +25,8 @@ public class TestUuidUtils extends TestCase {
     long timestamp = System.currentTimeMillis();
     UUID u1 = UuidUtils.randomUuidWithTimestamp(timestamp);
     UUID u2 = UuidUtils.randomUuidWithTimestamp(timestamp);
-    assertFalse(u1.equals(u2));
-    assertFalse(u1 == u2);
+    assertNotEquals(u1, u2);
+    assertNotSame(u1, u2);
   }
 
   /**

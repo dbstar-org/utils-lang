@@ -13,7 +13,7 @@ public class TestIterableWrapper extends TestCase {
     public void testNormal() {
         Iterator<String> iterator = Arrays.asList("1", "2", "3").iterator();
         Iterable<String> iterable = IterableWrapper.wrap(iterator);
-        assertTrue(iterator == iterable.iterator());
+        assertSame(iterator, iterable.iterator());
     }
 
     /**

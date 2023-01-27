@@ -16,7 +16,7 @@ public class IterableWrapper<E> implements Iterable<E> {
      * @return the wrapped Iterable
      */
     public static final <E> IterableWrapper<E> wrap(final Iterator<E> iterator) {
-        return new IterableWrapper<E>(iterator);
+        return new IterableWrapper<>(iterator);
     }
 
     protected IterableWrapper(final Iterator<E> iterator) {

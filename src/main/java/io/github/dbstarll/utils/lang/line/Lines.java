@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.zip.GZIPInputStream;
 
 public class Lines extends LineIterator implements Iterable<String> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LineIterator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Lines.class);
 
     private final LineValidator lineValidator;
 

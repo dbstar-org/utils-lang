@@ -22,7 +22,7 @@ public abstract class AbstractLineOperateExecutor<E extends Comparable<E>> imple
     /**
      * map of counters.
      */
-    private final ConcurrentMap<E, AtomicLong> counters = new ConcurrentHashMap<E, AtomicLong>();
+    private final ConcurrentMap<E, AtomicLong> counters = new ConcurrentHashMap<>();
 
     /**
      * logger for report.

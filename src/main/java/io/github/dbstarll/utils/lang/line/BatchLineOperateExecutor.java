@@ -28,7 +28,7 @@ public class BatchLineOperateExecutor<E extends Comparable<E>> extends AbstractL
      */
     public static <E extends Comparable<E>> BatchLineOperateExecutor<E> build(
             final BatchLineOperator<E> operator, final int batch) {
-        return new BatchLineOperateExecutor<E>(operator, batch);
+        return new BatchLineOperateExecutor<>(operator, batch);
     }
 
     @Override

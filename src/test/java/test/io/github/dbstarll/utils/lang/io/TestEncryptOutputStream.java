@@ -32,7 +32,7 @@ public class TestEncryptOutputStream extends TestCase {
                 IOUtils.copy(new ByteArrayInputStream(data), new EncryptOutputStream(out, encryptedKey)));
         byte[] encryptData = out.toByteArray();
 
-        assertFalse(data == encryptData);
+        assertNotSame(data, encryptData);
         assertFalse(Arrays.equals(data, encryptData));
         assertEquals(data.length, encryptData.length);
 
@@ -48,7 +48,7 @@ public class TestEncryptOutputStream extends TestCase {
         assertEquals(encryptData.length - len - 100, IOUtils.copy(in, eout));
         byte[] encryptData2 = out2.toByteArray();
 
-        assertFalse(encryptData == encryptData2);
+        assertNotSame(encryptData, encryptData2);
         assertFalse(Arrays.equals(encryptData, encryptData2));
         assertEquals(encryptData.length, encryptData2.length);
 

@@ -23,7 +23,7 @@ public class LineOperateExecutor<E extends Comparable<E>> extends AbstractLineOp
      * @return LineOperateExecutor
      */
     public static <E extends Comparable<E>> LineOperateExecutor<E> build(final LineOperator<E> operator) {
-        return new LineOperateExecutor<E>(operator);
+        return new LineOperateExecutor<>(operator);
     }
 
     @Override

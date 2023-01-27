@@ -31,7 +31,7 @@ public abstract class DigestorTestCase extends TestCase {
     byte[] data = RandomUtils.nextBytes(1024);
     byte[] d1 = digestor.digest(data);
     byte[] d2 = digestor.digest(data);
-    assertFalse(d1 == d2);
+    assertNotSame(d1, d2);
     assertTrue(Arrays.equals(d1, d2));
 
     assertNotNull(digestor.toString());

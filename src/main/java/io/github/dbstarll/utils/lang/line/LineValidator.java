@@ -16,24 +16,9 @@ public interface LineValidator {
      */
     boolean isValidLine(String line);
 
-    LineValidator ALL = new LineValidator() {
-        @Override
-        public boolean isValidLine(final String line) {
-            return true;
-        }
-    };
+    LineValidator ALL = line -> true;
 
-    LineValidator NOT_BLANK = new LineValidator() {
-        @Override
-        public boolean isValidLine(final String line) {
-            return StringUtils.isNotBlank(line);
-        }
-    };
+    LineValidator NOT_BLANK = line -> StringUtils.isNotBlank(line);
 
-    LineValidator NOT_COMMENT = new LineValidator() {
-        @Override
-        public boolean isValidLine(final String line) {
-            return StringUtils.isNotBlank(line) && !line.startsWith("#");
-        }
-    };
+    LineValidator NOT_COMMENT = line -> StringUtils.isNotBlank(line) && !line.startsWith("#");
 }

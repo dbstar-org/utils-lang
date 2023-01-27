@@ -18,7 +18,7 @@ public class MultiThreadLineOperateExecutor<E extends Comparable<E>> extends Lin
     protected MultiThreadLineOperateExecutor(final LineOperator<E> operator, final int thread, final int capacity) {
         super(operator);
         this.executor = new ThreadPoolExecutor(thread, thread, 1, TimeUnit.MINUTES,
-                new LinkedBlockingQueue<Runnable>(capacity));
+                new LinkedBlockingQueue<>(capacity));
     }
 
     /**
@@ -34,20 +34,15 @@ public class MultiThreadLineOperateExecutor<E extends Comparable<E>> extends Lin
             final LineOperator<E> operator,
             final int thread,
             final int capacity) {
-        return new MultiThreadLineOperateExecutor<E>(operator, thread, capacity);
+        return new MultiThreadLineOperateExecutor<>(operator, thread, capacity);
     }
 
     @Override
     protected void operate(final String line) {
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                MultiThreadLineOperateExecutor.super.operate(line);
-            }
-        };
+        Runnable task = () -> MultiThreadLineOperateExecutor.super.operate(line);
         try {
             executor.submit(task);
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             super.operate(line);
         }
     }

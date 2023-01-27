@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.Assert.assertNotEquals;
+
 public class TestBytes extends TestCase {
     /**
      * 测试正常参数的{@link Bytes#Bytes(byte[])}.
@@ -17,7 +19,7 @@ public class TestBytes extends TestCase {
         byte[] data = new byte[]{1, 2, 3};
         Bytes bytes = new Bytes(data);
         assertTrue(Arrays.equals(data, bytes.get()));
-        assertFalse(data == bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(3, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
     }
@@ -53,7 +55,7 @@ public class TestBytes extends TestCase {
         byte[] data = new byte[]{1, 2, 3};
         Bytes bytes = new Bytes(data, 0, data.length);
         assertTrue(Arrays.equals(data, bytes.get()));
-        assertFalse(data == bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(3, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
     }
@@ -149,7 +151,7 @@ public class TestBytes extends TestCase {
     public void testGetNormal() {
         byte[] data = new byte[]{1, 2, 3, 4};
         Bytes bytes = new Bytes(data);
-        assertFalse(data == bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(4, bytes.length());
         assertEquals(data[0], bytes.get(0));
         assertEquals(data[1], bytes.get(1));
@@ -210,15 +212,15 @@ public class TestBytes extends TestCase {
         Bytes b1 = new Bytes(new byte[]{1, 2, 3, 4});
         Bytes b2 = new Bytes(new byte[]{1, 2, 3, 4});
 
-        assertTrue(b1.equals(b1));
-        assertTrue(b1.equals(b2));
-        assertFalse(b1 == b2);
+        assertEquals(b1, b1);
+        assertEquals(b1, b2);
+        assertNotSame(b1, b2);
 
-        assertFalse(b1.equals(null));
-        assertFalse(b1.equals("b2"));
+        assertNotEquals(b1, null);
+        assertNotEquals(b1, "b2");
 
         Bytes b3 = new Bytes(new byte[]{1, 2, 3, 3});
-        assertFalse(b1.equals(b3));
+        assertNotEquals(b1, b3);
     }
 
     /**

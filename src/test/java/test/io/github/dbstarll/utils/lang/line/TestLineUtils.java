@@ -51,7 +51,9 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateLoggerException() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz");
-        assertNull(LineUtils.operate(LOGGER, "lines", in, "encryptedKey", 1, LINE_TYPE_OPERATOR));
+        final Map<LineType, Integer> counter = LineUtils.operate(LOGGER, "lines", in, "encryptedKey", 1, LINE_TYPE_OPERATOR);
+        assertNotNull(counter);
+        assertEquals(0, counter.size());
     }
 
     /**
@@ -59,7 +61,9 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateLoggerExceptionNull() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz");
-        assertNull(LineUtils.operate(null, "lines", in, "encryptedKey", 1, LINE_TYPE_OPERATOR));
+        final Map<LineType, Integer> counter = LineUtils.operate(null, "lines", in, "encryptedKey", 1, LINE_TYPE_OPERATOR);
+        assertNotNull(counter);
+        assertEquals(0, counter.size());
     }
 
     /**
@@ -67,7 +71,9 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateLoggerExceptionStrength() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz");
-        assertNull(LineUtils.operate(LOGGER, "lines", in, "encryptedKey", 1024, LINE_TYPE_OPERATOR));
+        final Map<LineType, Integer> counter = LineUtils.operate(LOGGER, "lines", in, "encryptedKey", 1024, LINE_TYPE_OPERATOR);
+        assertNotNull(counter);
+        assertEquals(0, counter.size());
     }
 
     /**
@@ -75,7 +81,9 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateLoggerExceptionStrengthNull() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz");
-        assertNull(LineUtils.operate(null, "lines", in, "encryptedKey", 1024, LINE_TYPE_OPERATOR));
+        final Map<LineType, Integer> counter = LineUtils.operate(null, "lines", in, "encryptedKey", 1024, LINE_TYPE_OPERATOR);
+        assertNotNull(counter);
+        assertEquals(0, counter.size());
     }
 
     /**

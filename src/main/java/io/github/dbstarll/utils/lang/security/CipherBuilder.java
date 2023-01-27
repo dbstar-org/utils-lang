@@ -1,6 +1,7 @@
 package io.github.dbstarll.utils.lang.security;
 
 import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
 import java.security.*;
 import java.security.spec.AlgorithmParameterSpec;
 
@@ -95,8 +96,12 @@ public final class CipherBuilder extends AbstractSecurityBuilder<Cipher, CipherA
         }
 
         @Override
-        public Cipher getInstance(final Class<Cipher> typeClass) throws Exception {
-            return Cipher.getInstance(transformation);
+        public Cipher getInstance(final Class<Cipher> typeClass) throws InstanceException {
+            try {
+                return Cipher.getInstance(transformation);
+            } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+                throw new InstanceException("getInstance failed for: " + typeClass.getName(), e);
+            }
         }
     }
 }

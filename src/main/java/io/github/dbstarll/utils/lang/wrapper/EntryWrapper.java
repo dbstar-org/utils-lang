@@ -28,7 +28,7 @@ public class EntryWrapper<K, V> implements Entry<K, V> {
      * @return the wrapped entry
      */
     public static final <K, V> EntryWrapper<K, V> wrap(final K key, final V value) {
-        return new EntryWrapper<K, V>(key, value);
+        return new EntryWrapper<>(key, value);
     }
 
     protected EntryWrapper(final K key, final V value) {

@@ -5,8 +5,8 @@ public abstract class TaskLauncher extends AbstractLauncher<Task> {
     protected final int run(final Class<? extends Task> taskClass, final String... args) throws LaunchException {
         Task task;
         try {
-            task = taskClass.newInstance();
-        } catch (IllegalAccessException | InstantiationException ex) {
+            task = taskClass.getDeclaredConstructor().newInstance();
+        } catch (ReflectiveOperationException ex) {
             throw new LaunchException(ex);
         }
         return task.run(args);
