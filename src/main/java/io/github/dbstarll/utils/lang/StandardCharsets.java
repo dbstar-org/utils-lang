@@ -3,7 +3,11 @@ package io.github.dbstarll.utils.lang;
 import java.nio.charset.Charset;
 
 /**
- * Deprecated: use java.nio.charset.StandardCharsets.
+ * Constant definitions for the standard {@link Charset Charsets}. These
+ * charsets are guaranteed to be available on every implementation of the Java
+ * platform.
+ *
+ * @deprecated use java.nio.charset.StandardCharsets
  */
 @Deprecated
 public final class StandardCharsets {

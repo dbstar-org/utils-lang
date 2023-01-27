@@ -1,12 +1,12 @@
 package io.github.dbstarll.utils.lang.line;
 
 import io.github.dbstarll.utils.lang.EncryptUtils;
-import io.github.dbstarll.utils.lang.StandardCharsets;
 import io.github.dbstarll.utils.lang.bytes.Bytes;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

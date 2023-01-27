@@ -1,6 +1,5 @@
 package test.io.github.dbstarll.utils.lang.line;
 
-import io.github.dbstarll.utils.lang.StandardCharsets;
 import io.github.dbstarll.utils.lang.line.*;
 import io.github.dbstarll.utils.lang.test.LineType;
 import io.github.dbstarll.utils.lang.test.LineTypeOperator;
@@ -11,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class TestLineUtils extends TestCase {

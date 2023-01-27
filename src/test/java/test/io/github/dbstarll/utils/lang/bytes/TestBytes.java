@@ -1,9 +1,9 @@
 package test.io.github.dbstarll.utils.lang.bytes;
 
-import io.github.dbstarll.utils.lang.StandardCharsets;
 import io.github.dbstarll.utils.lang.bytes.Bytes;
 import junit.framework.TestCase;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

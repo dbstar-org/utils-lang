@@ -1,11 +1,11 @@
 package io.github.dbstarll.utils.lang.test;
 
-import io.github.dbstarll.utils.lang.StandardCharsets;
 import io.github.dbstarll.utils.lang.line.AbstractLineOperateExecutor;
 import io.github.dbstarll.utils.lang.line.BatchLineOperateExecutor;
 import io.github.dbstarll.utils.lang.line.Lines;
 import junit.framework.TestCase;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map.Entry;

@@ -1,7 +1,6 @@
 package test.io.github.dbstarll.utils.lang.line;
 
 import io.github.dbstarll.utils.lang.EncryptUtils;
-import io.github.dbstarll.utils.lang.StandardCharsets;
 import io.github.dbstarll.utils.lang.bytes.Bytes;
 import io.github.dbstarll.utils.lang.io.EncryptInputStream;
 import io.github.dbstarll.utils.lang.line.LineValidator;
@@ -10,6 +9,7 @@ import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 
 public class TestLines extends TestCase {
