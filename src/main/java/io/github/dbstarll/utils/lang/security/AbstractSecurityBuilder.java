@@ -14,11 +14,11 @@ public abstract class AbstractSecurityBuilder<T, A extends Enum<?>> implements S
             throws NoSuchAlgorithmException, InstanceException {
         try {
             this.type = instancer.getInstance(typeClass);
-        } catch (Exception ex) {
-            if (ex instanceof NoSuchAlgorithmException) {
-                throw (NoSuchAlgorithmException) ex;
+        } catch (InstanceException ex) {
+            if (ex.getCause() instanceof NoSuchAlgorithmException) {
+                throw (NoSuchAlgorithmException) ex.getCause();
             } else {
-                throw new InstanceException("getInstance failed for: " + typeClass.getName(), ex);
+                throw ex;
             }
         }
     }
