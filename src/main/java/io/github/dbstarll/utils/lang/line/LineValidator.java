@@ -18,7 +18,7 @@ public interface LineValidator {
 
     LineValidator ALL = line -> true;
 
-    LineValidator NOT_BLANK = line -> StringUtils.isNotBlank(line);
+    LineValidator NOT_BLANK = StringUtils::isNotBlank;
 
     LineValidator NOT_COMMENT = line -> StringUtils.isNotBlank(line) && !line.startsWith("#");
 }

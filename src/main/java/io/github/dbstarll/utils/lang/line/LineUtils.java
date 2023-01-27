@@ -29,7 +29,7 @@ public final class LineUtils {
         for (String line : lines) {
             final E result = lineOperator.operate(line);
             final Integer counter = counters.get(result);
-            counters.put(result, 1 + (counter == null ? 0 : counter.intValue()));
+            counters.put(result, 1 + (counter == null ? 0 : counter));
         }
         return counters;
     }

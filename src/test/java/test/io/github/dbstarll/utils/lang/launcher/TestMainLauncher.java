@@ -38,7 +38,7 @@ public class TestMainLauncher extends TestCase {
         }
 
         try {
-            launcher.run(new String[]{});
+            launcher.run();
             fail("catch 'Need task token.'");
         } catch (IllegalArgumentException ex) {
             assertEquals("Need task token.", ex.getMessage());
@@ -113,26 +113,25 @@ public class TestMainLauncher extends TestCase {
     }
 
     private static class Launcher extends MainLauncher {
-        public final void addMainTask(String token, Class<? extends Object> taskClass) {
+        public final void addMainTask(String token, Class<?> taskClass) {
             addTask(token, taskClass);
         }
     }
 
     public static class MockOkTask {
-        public static final void main(String[] args) {
+        public static void main(String[] args) {
             sign.set(Integer.parseInt(args[0]));
         }
     }
 
     private static class MockErrorAccessTask {
-        @SuppressWarnings("unused")
         public final void main(String[] args) {
             sign.set(Integer.parseInt(args[0]));
         }
     }
 
     public static class MockErrorNoMainTask {
-        public static final void main2(String[] args) {
+        public static void main2(String[] args) {
             sign.set(Integer.parseInt(args[0]));
         }
     }

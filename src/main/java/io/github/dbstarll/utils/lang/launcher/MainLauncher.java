@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 
 public abstract class MainLauncher extends AbstractLauncher<Object> {
     @Override
-    protected final int run(final Class<? extends Object> taskClass, final String... args) throws LaunchException {
+    protected final int run(final Class<?> taskClass, final String... args) throws LaunchException {
         Method method;
         try {
             method = taskClass.getMethod("main", String[].class);

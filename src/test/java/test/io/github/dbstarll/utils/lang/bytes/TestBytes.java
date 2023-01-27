@@ -255,7 +255,7 @@ public class TestBytes extends TestCase {
      * 通过Collection排序来测试{@link Bytes#compareTo(Bytes)}.
      */
     public void testCompareByCollection() {
-        List<Bytes> list = new ArrayList<Bytes>(6);
+        List<Bytes> list = new ArrayList<>(6);
 
         Bytes b1 = new Bytes(new byte[]{1, 2, 3, 4});
         Bytes b2 = new Bytes(new byte[]{1, 2, 3, 4});

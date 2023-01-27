@@ -23,7 +23,7 @@ public class TestLines extends TestCase {
 
     private static int read(Iterable<String> lines) {
         int count = 0;
-        for (@SuppressWarnings("unused") String line : lines) {
+        for (String line : lines) {
             count++;
         }
         return count;
