@@ -21,16 +21,16 @@ public class TestCipherBuilder extends TestCase {
         final SecureRandom random = SecurityFactory.builder(SecureRandomAlgorithm.SHA1PRNG).build();
         final Cipher encryptCipher = SecurityFactory
                 .builder(CipherAlgorithm.AES, CipherAlgorithmMode.CBC, CipherAlgorithmPadding.PKCS5Padding)
+                .encrypt(secretKey, iv, random)
                 .build();
-        encryptCipher.init(Cipher.ENCRYPT_MODE, secretKey, iv, random);
 
         final String content = "test it";
         final byte[] encrypted = encryptCipher.doFinal(content.getBytes(StandardCharsets.UTF_8));
 
         final Cipher decryptCipher = SecurityFactory
                 .builder(CipherAlgorithm.AES, CipherAlgorithmMode.CBC, CipherAlgorithmPadding.PKCS5Padding)
+                .decrypt(secretKey, iv, random)
                 .build();
-        decryptCipher.init(Cipher.DECRYPT_MODE, secretKey, iv, random);
         final byte[] decrypted = decryptCipher.doFinal(encrypted);
 
         assertEquals(content, new String(decrypted, StandardCharsets.UTF_8));

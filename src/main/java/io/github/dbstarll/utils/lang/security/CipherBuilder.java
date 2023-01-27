@@ -36,6 +36,23 @@ public final class CipherBuilder extends AbstractSecurityBuilder<Cipher, CipherA
     }
 
     /**
+     * 设置加密用的key，参数和随机数.
+     *
+     * @param key    key
+     * @param spec   参数
+     * @param random 随机数
+     * @return CipherBuilder
+     * @throws InvalidKeyException                无效的key
+     * @throws InvalidAlgorithmParameterException 无效的参数
+     */
+    public CipherBuilder encrypt(final Key key, final AlgorithmParameterSpec spec, final SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
+        getType().init(Cipher.ENCRYPT_MODE, key, spec, random);
+        return this;
+    }
+
+
+    /**
      * 设置解密用的key和随机数.
      *
      * @param key    key
