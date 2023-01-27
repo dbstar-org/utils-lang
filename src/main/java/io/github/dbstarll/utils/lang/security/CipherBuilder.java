@@ -85,12 +85,12 @@ public final class CipherBuilder extends AbstractSecurityBuilder<Cipher, CipherA
 
         TransformationInstancer(final CipherAlgorithm algorithm, final CipherAlgorithmMode mode,
                                 final CipherAlgorithmPadding padding) {
-            final StringBuilder builder = new StringBuilder(algorithm.name());
+            final StringBuilder builder = new StringBuilder(algorithm.toString());
             if (mode != null) {
-                builder.append('/').append(mode.name());
+                builder.append('/').append(mode);
             }
             if (padding != null) {
-                builder.append('/').append(padding.name());
+                builder.append('/').append(padding);
             }
             this.transformation = builder.toString();
         }
