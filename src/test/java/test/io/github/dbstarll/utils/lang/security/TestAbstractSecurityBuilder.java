@@ -1,6 +1,7 @@
 package test.io.github.dbstarll.utils.lang.security;
 
 import io.github.dbstarll.utils.lang.security.AbstractSecurityBuilder;
+import io.github.dbstarll.utils.lang.security.AlgorithmInstancer;
 import io.github.dbstarll.utils.lang.security.InstanceException;
 import junit.framework.TestCase;
 
@@ -12,17 +13,23 @@ public class TestAbstractSecurityBuilder extends TestCase {
 
     public static class MyClass {
         private final String algorithm;
+        private final String provider;
 
-        private MyClass(String algorithm) {
+        private MyClass(final String algorithm, final String provider) {
             this.algorithm = algorithm;
+            this.provider = provider;
         }
 
-        public static MyClass getInstance(String algorithm) throws NoSuchAlgorithmException {
+        public static MyClass getInstance(final String algorithm) throws NoSuchAlgorithmException {
             if (MyEnum.NO_SUCH_ALGORITHM.toString().equals(algorithm)) {
                 throw new NoSuchAlgorithmException(algorithm);
             } else {
-                return new MyClass(algorithm);
+                return new MyClass(algorithm, null);
             }
+        }
+
+        public static MyClass getInstance(final String algorithm, final String provider) {
+            return new MyClass(algorithm, provider);
         }
     }
 
@@ -33,6 +40,10 @@ public class TestAbstractSecurityBuilder extends TestCase {
     private static class MyBuilder<T, A extends Enum<?>> extends AbstractSecurityBuilder<T, A> {
         public MyBuilder(final Class<T> typeClass, final A algorithm) throws NoSuchAlgorithmException, InstanceException {
             super(typeClass, algorithm);
+        }
+
+        public MyBuilder(final Class<T> typeClass, final A algorithm, final String provider) throws NoSuchAlgorithmException, InstanceException {
+            super(typeClass, new AlgorithmInstancer<>(algorithm, provider));
         }
     }
 
@@ -61,5 +72,13 @@ public class TestAbstractSecurityBuilder extends TestCase {
         final MyClass myClass = new MyBuilder<>(MyClass.class, MyEnum.ABC).build();
         assertNotNull(myClass);
         assertEquals(MyEnum.ABC.toString(), myClass.algorithm);
+        assertNull(myClass.provider);
+    }
+
+    public void testProvider() throws InstanceException, NoSuchAlgorithmException {
+        final MyClass myClass = new MyBuilder<>(MyClass.class, MyEnum.ABC, "test").build();
+        assertNotNull(myClass);
+        assertEquals(MyEnum.ABC.toString(), myClass.algorithm);
+        assertEquals("test", myClass.provider);
     }
 }
