@@ -11,6 +11,18 @@ public class TestAbstractSecurityBuilder extends TestCase {
     private static class NoSuchMethodClass {
     }
 
+    private static class IllegalAccessClass {
+        public static IllegalAccessClass getInstance(final String algorithm) {
+            return new IllegalAccessClass();
+        }
+    }
+
+    public static class NoStaticClass {
+        public NoStaticClass getInstance(final String algorithm) {
+            return new NoStaticClass();
+        }
+    }
+
     public static class MyClass {
         private final String algorithm;
         private final String provider;
@@ -65,6 +77,28 @@ public class TestAbstractSecurityBuilder extends TestCase {
         } catch (Exception ex) {
             assertEquals(NoSuchAlgorithmException.class, ex.getClass());
             assertEquals(MyEnum.NO_SUCH_ALGORITHM.toString(), ex.getMessage());
+        }
+    }
+
+    public void testIllegalAccess() {
+        try {
+            new MyBuilder<>(IllegalAccessClass.class, MyEnum.ABC);
+            fail("catch InstanceException");
+        } catch (Exception ex) {
+            assertEquals(InstanceException.class, ex.getClass());
+            assertNotNull(ex.getCause());
+            assertEquals(IllegalAccessException.class, ex.getCause().getClass());
+        }
+    }
+
+    public void testNoStatic() {
+        try {
+            new MyBuilder<>(NoStaticClass.class, MyEnum.ABC);
+            fail("catch InstanceException");
+        } catch (Exception ex) {
+            assertEquals(InstanceException.class, ex.getClass());
+            assertNotNull(ex.getCause());
+            assertEquals(IllegalAccessException.class, ex.getCause().getClass());
         }
     }
 

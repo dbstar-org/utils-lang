@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 public final class AlgorithmInstancer<T, A extends Enum<?>> implements Instancer<T> {
     private final A algorithm;
@@ -29,7 +30,11 @@ public final class AlgorithmInstancer<T, A extends Enum<?>> implements Instancer
                 method = typeClass.getMethod("getInstance", String.class, String.class);
             }
         } catch (NoSuchMethodException e) {
-            throw new InstanceException("NoSuchMethod: getInstance() for" + typeClass.getName(), e);
+            throw new InstanceException("NoSuchMethod: getInstance() for: " + typeClass.getName(), e);
+        }
+        if (!Modifier.isStatic(method.getModifiers())) {
+            final Exception cause = new IllegalAccessException(method.toString());
+            throw new InstanceException("getInstance() not static for: " + typeClass.getName(), cause);
         }
         try {
             if (StringUtils.isBlank(provider)) {
