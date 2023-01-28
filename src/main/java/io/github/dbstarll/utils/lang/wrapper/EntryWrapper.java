@@ -27,8 +27,8 @@ public class EntryWrapper<K, V> implements Entry<K, V> {
      * @param <V>   type of value
      * @return the wrapped entry
      */
-    public static final <K, V> EntryWrapper<K, V> wrap(final K key, final V value) {
-        return new EntryWrapper<K, V>(key, value);
+    public static <K, V> EntryWrapper<K, V> wrap(final K key, final V value) {
+        return new EntryWrapper<>(key, value);
     }
 
     protected EntryWrapper(final K key, final V value) {
@@ -63,7 +63,7 @@ public class EntryWrapper<K, V> implements Entry<K, V> {
             return true;
         } else if (obj == null) {
             return false;
-        } else if (!Entry.class.isInstance(obj)) {
+        } else if (!(obj instanceof Entry)) {
             return false;
         }
 
@@ -76,13 +76,10 @@ public class EntryWrapper<K, V> implements Entry<K, V> {
             return false;
         }
         if (value == null) {
-            if (other.getValue() != null) {
-                return false;
-            }
-        } else if (!value.equals(other.getValue())) {
-            return false;
+            return other.getValue() == null;
+        } else {
+            return value.equals(other.getValue());
         }
-        return true;
     }
 
     private static int getHashCode(final Object key, final Object value) {

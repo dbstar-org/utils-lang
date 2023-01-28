@@ -9,7 +9,7 @@ public abstract class AbstractLauncher<E> implements Task {
     /**
      * map of tasks with token.
      */
-    private final Map<String, Class<? extends E>> tasks = new HashMap<String, Class<? extends E>>();
+    private final Map<String, Class<? extends E>> tasks = new HashMap<>();
 
     protected final void addTask(final String token, final Class<? extends E> taskClass) {
         tasks.put(token, taskClass);

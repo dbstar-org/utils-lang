@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+import static org.junit.Assert.assertArrayEquals;
+
 public class TestEncryptInputStream extends TestCase {
     private Bytes encryptedKey;
 
@@ -35,7 +37,7 @@ public class TestEncryptInputStream extends TestCase {
                 IOUtils.copy(new EncryptInputStream(new ByteArrayInputStream(data), encryptedKey), out));
         byte[] encryptData = out.toByteArray();
 
-        assertFalse(data == encryptData);
+        assertNotSame(data, encryptData);
         assertFalse(Arrays.equals(data, encryptData));
         assertEquals(data.length, encryptData.length);
 
@@ -54,10 +56,10 @@ public class TestEncryptInputStream extends TestCase {
         assertEquals(encryptData.length - len - 100, IOUtils.copy(in, out2));
         byte[] encryptData2 = out2.toByteArray();
 
-        assertFalse(encryptData == encryptData2);
+        assertNotSame(encryptData, encryptData2);
         assertFalse(Arrays.equals(encryptData, encryptData2));
         assertEquals(encryptData.length, encryptData2.length);
 
-        assertTrue(Arrays.equals(data, encryptData2));
+        assertArrayEquals(data, encryptData2);
     }
 }

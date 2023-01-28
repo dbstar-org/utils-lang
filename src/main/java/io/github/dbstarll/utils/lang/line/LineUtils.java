@@ -1,12 +1,13 @@
 package io.github.dbstarll.utils.lang.line;
 
 import io.github.dbstarll.utils.lang.EncryptUtils;
-import io.github.dbstarll.utils.lang.StandardCharsets;
 import io.github.dbstarll.utils.lang.bytes.Bytes;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,11 +25,11 @@ public final class LineUtils {
      * @return 行操作结果的计数器
      */
     public static <E> Map<E, Integer> operate(final Iterable<String> lines, final LineOperator<E> lineOperator) {
-        final Map<E, Integer> counters = new HashMap<E, Integer>();
+        final Map<E, Integer> counters = new HashMap<>();
         for (String line : lines) {
             final E result = lineOperator.operate(line);
             final Integer counter = counters.get(result);
-            counters.put(result, 1 + (counter == null ? 0 : counter.intValue()));
+            counters.put(result, 1 + (counter == null ? 0 : counter));
         }
         return counters;
     }
@@ -54,23 +55,23 @@ public final class LineUtils {
         final Bytes key;
         try {
             key = new Bytes(EncryptUtils.sha(encryptedKey, strength));
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             if (logger != null) {
                 logger.error("无法加载" + name + "列表。", ex);
             }
             IOUtils.closeQuietly(in);
-            return null;
+            return Collections.emptyMap();
         }
 
         final Iterable<String> lines;
         try {
             lines = Lines.openGZip(in, key, StandardCharsets.UTF_8, LineValidator.NOT_COMMENT);
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             if (logger != null) {
                 logger.error("无法加载" + name + "列表。", ex);
             }
             IOUtils.closeQuietly(in);
-            return null;
+            return Collections.emptyMap();
         }
 
         return operate(lines, lineOperator);
@@ -131,7 +132,7 @@ public final class LineUtils {
         final Bytes key;
         try {
             key = new Bytes(EncryptUtils.sha(encryptedKey, strength));
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             if (logger != null) {
                 logger.error("无法加载" + name + "列表。", ex);
             }
@@ -142,7 +143,7 @@ public final class LineUtils {
         final Iterable<String> lines;
         try {
             lines = Lines.openGZip(in, key, StandardCharsets.UTF_8, LineValidator.NOT_COMMENT);
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             if (logger != null) {
                 logger.error("无法加载" + name + "列表。", ex);
             }

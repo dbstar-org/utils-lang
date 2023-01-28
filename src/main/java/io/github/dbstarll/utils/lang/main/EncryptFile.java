@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public final class EncryptFile {
     private static final Logger LOGGER = LoggerFactory.getLogger(EncryptFile.class);
@@ -34,7 +35,7 @@ public final class EncryptFile {
         new EncryptFile(encryptedKey).encrypt(token, new File(args[1]));
     }
 
-    private void encrypt(final String token, final File fileOriginal) throws Exception {
+    private void encrypt(final String token, final File fileOriginal) throws IOException {
         try (FileInputStream in = new FileInputStream(fileOriginal)) {
             final File fileEncrypt = getEncryptFile(token, fileOriginal);
             try (EncryptOutputStream out = new EncryptOutputStream(new FileOutputStream(fileEncrypt), encryptedKey)) {

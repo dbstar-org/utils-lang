@@ -15,7 +15,7 @@ public class MultiThreadBatchLineOperateExecutor<E extends Comparable<E>> extend
                                                   final int capacity) {
         super(operator, batch);
         this.executor = new ThreadPoolExecutor(thread, thread, 1, TimeUnit.MINUTES,
-                new LinkedBlockingQueue<Runnable>(capacity));
+                new LinkedBlockingQueue<>(capacity));
     }
 
     /**
@@ -33,21 +33,16 @@ public class MultiThreadBatchLineOperateExecutor<E extends Comparable<E>> extend
             final int batch,
             final int thread,
             final int capacity) {
-        return new MultiThreadBatchLineOperateExecutor<E>(operator, batch, thread, capacity);
+        return new MultiThreadBatchLineOperateExecutor<>(operator, batch, thread, capacity);
     }
 
     @Override
     protected void operate(final String... lines) {
         final String[] batch = Arrays.copyOf(lines, lines.length);
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                MultiThreadBatchLineOperateExecutor.super.operate(batch);
-            }
-        };
+        Runnable task = () -> MultiThreadBatchLineOperateExecutor.super.operate(batch);
         try {
             executor.submit(task);
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             super.operate(batch);
         }
     }

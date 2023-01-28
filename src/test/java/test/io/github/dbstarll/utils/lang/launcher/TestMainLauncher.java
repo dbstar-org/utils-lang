@@ -24,10 +24,8 @@ public class TestMainLauncher extends TestCase {
 
     /**
      * 测试{@link AbstractLauncher#run(String[])}在无参数时抛出异常.
-     *
-     * @throws Throwable Exception
      */
-    public void testNullParams() throws Throwable {
+    public void testNullParams() {
         Launcher launcher = new Launcher();
 
         try {
@@ -38,7 +36,7 @@ public class TestMainLauncher extends TestCase {
         }
 
         try {
-            launcher.run(new String[]{});
+            launcher.run();
             fail("catch 'Need task token.'");
         } catch (IllegalArgumentException ex) {
             assertEquals("Need task token.", ex.getMessage());
@@ -48,9 +46,8 @@ public class TestMainLauncher extends TestCase {
     /**
      * 测试{@link AbstractLauncher#run(String[])}在无对应任务时抛出异常.
      *
-     * @throws Throwable Exception
      */
-    public void testNoMatchToken() throws Throwable {
+    public void testNoMatchToken() {
         Launcher launcher = new Launcher();
 
         try {
@@ -64,9 +61,8 @@ public class TestMainLauncher extends TestCase {
     /**
      * 测试任务执行.
      *
-     * @throws Throwable Exception
      */
-    public void testRun() throws Throwable {
+    public void testRun() {
         Launcher launcher = new Launcher();
         launcher.addMainTask("token", MockOkTask.class);
 
@@ -88,9 +84,8 @@ public class TestMainLauncher extends TestCase {
     /**
      * 测试任务执行异常.
      *
-     * @throws Throwable Exception
      */
-    public void testRunFailed() throws Throwable {
+    public void testRunFailed() {
         Launcher launcher = new Launcher();
         launcher.addMainTask("main", MockErrorNoMainTask.class);
         launcher.addMainTask("access", MockErrorAccessTask.class);
@@ -113,26 +108,25 @@ public class TestMainLauncher extends TestCase {
     }
 
     private static class Launcher extends MainLauncher {
-        public final void addMainTask(String token, Class<? extends Object> taskClass) {
+        public final void addMainTask(String token, Class<?> taskClass) {
             addTask(token, taskClass);
         }
     }
 
     public static class MockOkTask {
-        public static final void main(String[] args) {
+        public static void main(String[] args) {
             sign.set(Integer.parseInt(args[0]));
         }
     }
 
     private static class MockErrorAccessTask {
-        @SuppressWarnings("unused")
         public final void main(String[] args) {
             sign.set(Integer.parseInt(args[0]));
         }
     }
 
     public static class MockErrorNoMainTask {
-        public static final void main2(String[] args) {
+        public static void main2(String[] args) {
             sign.set(Integer.parseInt(args[0]));
         }
     }

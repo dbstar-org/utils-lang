@@ -5,16 +5,16 @@ import java.lang.reflect.Method;
 
 public abstract class MainLauncher extends AbstractLauncher<Object> {
     @Override
-    protected final int run(final Class<? extends Object> taskClass, final String... args) throws LaunchException {
+    protected final int run(final Class<?> taskClass, final String... args) throws LaunchException {
         Method method;
         try {
-            method = taskClass.getMethod("main", new Class[]{String[].class});
+            method = taskClass.getMethod("main", String[].class);
         } catch (NoSuchMethodException ex) {
             throw new LaunchException(ex);
         }
 
         try {
-            method.invoke(taskClass, new Object[]{args});
+            method.invoke(taskClass, (Object) args);
         } catch (InvocationTargetException ex) {
             final Throwable target = ex.getTargetException();
             if (target instanceof RuntimeException) {

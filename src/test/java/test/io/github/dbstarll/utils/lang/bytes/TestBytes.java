@@ -1,13 +1,16 @@
 package test.io.github.dbstarll.utils.lang.bytes;
 
-import io.github.dbstarll.utils.lang.StandardCharsets;
 import io.github.dbstarll.utils.lang.bytes.Bytes;
 import junit.framework.TestCase;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class TestBytes extends TestCase {
     /**
@@ -16,8 +19,8 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayNormal() {
         byte[] data = new byte[]{1, 2, 3};
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data, bytes.get()));
-        assertFalse(data == bytes.get());
+        assertArrayEquals(data, bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(3, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
     }
@@ -28,7 +31,7 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayNull() {
         byte[] data = null;
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data, bytes.get()));
+        assertArrayEquals(data, bytes.get());
         assertNull(bytes.get());
         assertEquals(-1, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
@@ -40,8 +43,8 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayEmpty() {
         byte[] data = new byte[]{};
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data, bytes.get()));
-        assertFalse(data == bytes.get());
+        assertArrayEquals(data, bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(0, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
     }
@@ -52,8 +55,8 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayRangeNormal() {
         byte[] data = new byte[]{1, 2, 3};
         Bytes bytes = new Bytes(data, 0, data.length);
-        assertTrue(Arrays.equals(data, bytes.get()));
-        assertFalse(data == bytes.get());
+        assertArrayEquals(data, bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(3, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
     }
@@ -64,7 +67,7 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayRangeNull() {
         byte[] data = null;
         Bytes bytes = new Bytes(data, 0, 10);
-        assertTrue(Arrays.equals(data, bytes.get()));
+        assertArrayEquals(data, bytes.get());
         assertNull(bytes.get());
         assertEquals(-1, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
@@ -76,8 +79,8 @@ public class TestBytes extends TestCase {
     public void testCreateByBypeArrayRangeEmpty() {
         byte[] data = new byte[]{};
         Bytes bytes = new Bytes(data, 0, 0);
-        assertTrue(Arrays.equals(data, bytes.get()));
-        assertFalse(data == bytes.get());
+        assertArrayEquals(data, bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(0, bytes.length());
         assertEquals(Arrays.hashCode(data), bytes.hashCode());
     }
@@ -116,7 +119,7 @@ public class TestBytes extends TestCase {
     public void testCreateByStringNormal() {
         String data = "123";
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data.getBytes(StandardCharsets.UTF_8), bytes.get()));
+        assertArrayEquals(data.getBytes(StandardCharsets.UTF_8), bytes.get());
         assertEquals(3, bytes.length());
         assertEquals(Arrays.hashCode(data.getBytes(StandardCharsets.UTF_8)), bytes.hashCode());
     }
@@ -138,7 +141,7 @@ public class TestBytes extends TestCase {
     public void testCreateByStringEmpty() {
         String data = "";
         Bytes bytes = new Bytes(data);
-        assertTrue(Arrays.equals(data.getBytes(StandardCharsets.UTF_8), bytes.get()));
+        assertArrayEquals(data.getBytes(StandardCharsets.UTF_8), bytes.get());
         assertEquals(0, bytes.length());
         assertEquals(Arrays.hashCode(data.getBytes(StandardCharsets.UTF_8)), bytes.hashCode());
     }
@@ -149,7 +152,7 @@ public class TestBytes extends TestCase {
     public void testGetNormal() {
         byte[] data = new byte[]{1, 2, 3, 4};
         Bytes bytes = new Bytes(data);
-        assertFalse(data == bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(4, bytes.length());
         assertEquals(data[0], bytes.get(0));
         assertEquals(data[1], bytes.get(1));
@@ -163,7 +166,7 @@ public class TestBytes extends TestCase {
     public void testGetNormalSub() {
         byte[] data = new byte[]{1, 2, 3, 4};
         Bytes bytes = new Bytes(data, 1, 3);
-        assertFalse(data == bytes.get());
+        assertNotSame(data, bytes.get());
         assertEquals(2, bytes.length());
         assertEquals(data[1], bytes.get(0));
         assertEquals(data[2], bytes.get(1));
@@ -210,15 +213,15 @@ public class TestBytes extends TestCase {
         Bytes b1 = new Bytes(new byte[]{1, 2, 3, 4});
         Bytes b2 = new Bytes(new byte[]{1, 2, 3, 4});
 
-        assertTrue(b1.equals(b1));
-        assertTrue(b1.equals(b2));
-        assertFalse(b1 == b2);
+        assertEquals(b1, b1);
+        assertEquals(b1, b2);
+        assertNotSame(b1, b2);
 
-        assertFalse(b1.equals(null));
-        assertFalse(b1.equals("b2"));
+        assertNotEquals(b1, null);
+        assertNotEquals(b1, "b2");
 
         Bytes b3 = new Bytes(new byte[]{1, 2, 3, 3});
-        assertFalse(b1.equals(b3));
+        assertNotEquals(b1, b3);
     }
 
     /**
@@ -253,7 +256,7 @@ public class TestBytes extends TestCase {
      * 通过Collection排序来测试{@link Bytes#compareTo(Bytes)}.
      */
     public void testCompareByCollection() {
-        List<Bytes> list = new ArrayList<Bytes>(6);
+        List<Bytes> list = new ArrayList<>(6);
 
         Bytes b1 = new Bytes(new byte[]{1, 2, 3, 4});
         Bytes b2 = new Bytes(new byte[]{1, 2, 3, 4});

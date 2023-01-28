@@ -1,7 +1,6 @@
 package io.github.dbstarll.utils.lang.bytes;
 
-import io.github.dbstarll.utils.lang.StandardCharsets;
-
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**

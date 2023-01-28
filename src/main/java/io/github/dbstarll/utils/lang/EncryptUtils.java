@@ -159,6 +159,6 @@ public final class EncryptUtils {
      *                                  the specified algorithm.
      */
     public static byte[] sha(final String data, final int strength) throws NoSuchAlgorithmException {
-        return sha(data.getBytes(StandardCharsets.UTF_8), strength);
+        return sha(data.getBytes(java.nio.charset.StandardCharsets.UTF_8), strength);
     }
 }

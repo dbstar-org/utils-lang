@@ -1,6 +1,5 @@
 package test.io.github.dbstarll.utils.lang.line;
 
-import io.github.dbstarll.utils.lang.StandardCharsets;
 import io.github.dbstarll.utils.lang.line.*;
 import io.github.dbstarll.utils.lang.test.LineType;
 import io.github.dbstarll.utils.lang.test.LineTypeOperator;
@@ -11,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class TestLineUtils extends TestCase {
@@ -51,7 +51,9 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateLoggerException() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz");
-        assertNull(LineUtils.operate(LOGGER, "lines", in, "encryptedKey", 1, LINE_TYPE_OPERATOR));
+        final Map<LineType, Integer> counter = LineUtils.operate(LOGGER, "lines", in, "encryptedKey", 1, LINE_TYPE_OPERATOR);
+        assertNotNull(counter);
+        assertEquals(0, counter.size());
     }
 
     /**
@@ -59,7 +61,9 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateLoggerExceptionNull() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz");
-        assertNull(LineUtils.operate(null, "lines", in, "encryptedKey", 1, LINE_TYPE_OPERATOR));
+        final Map<LineType, Integer> counter = LineUtils.operate(null, "lines", in, "encryptedKey", 1, LINE_TYPE_OPERATOR);
+        assertNotNull(counter);
+        assertEquals(0, counter.size());
     }
 
     /**
@@ -67,7 +71,9 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateLoggerExceptionStrength() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz");
-        assertNull(LineUtils.operate(LOGGER, "lines", in, "encryptedKey", 1024, LINE_TYPE_OPERATOR));
+        final Map<LineType, Integer> counter = LineUtils.operate(LOGGER, "lines", in, "encryptedKey", 1024, LINE_TYPE_OPERATOR);
+        assertNotNull(counter);
+        assertEquals(0, counter.size());
     }
 
     /**
@@ -75,7 +81,9 @@ public class TestLineUtils extends TestCase {
      */
     public void testOperateLoggerExceptionStrengthNull() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines-encrypt.txt.gz");
-        assertNull(LineUtils.operate(null, "lines", in, "encryptedKey", 1024, LINE_TYPE_OPERATOR));
+        final Map<LineType, Integer> counter = LineUtils.operate(null, "lines", in, "encryptedKey", 1024, LINE_TYPE_OPERATOR);
+        assertNotNull(counter);
+        assertEquals(0, counter.size());
     }
 
     /**
