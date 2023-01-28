@@ -7,8 +7,8 @@ public class AlgorithmDigestor implements Digestor {
     private final MessageDigest digest;
 
     /**
-     * @param algorithm
-     * @throws NoSuchAlgorithmException
+     * @param algorithm 算法
+     * @throws NoSuchAlgorithmException 没有指定算法时抛出
      */
     public AlgorithmDigestor(final String algorithm) throws NoSuchAlgorithmException {
         this.digest = MessageDigest.getInstance(algorithm);

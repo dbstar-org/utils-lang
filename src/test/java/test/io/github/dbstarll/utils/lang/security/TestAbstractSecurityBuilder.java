@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 import java.security.NoSuchAlgorithmException;
 
 public class TestAbstractSecurityBuilder extends TestCase {
-    private class NoSuchMethodClass {
+    private static class NoSuchMethodClass {
     }
 
     public static class MyClass {
@@ -30,7 +30,7 @@ public class TestAbstractSecurityBuilder extends TestCase {
         ABC, NO_SUCH_ALGORITHM
     }
 
-    private class MyBuilder<T, A extends Enum<?>> extends AbstractSecurityBuilder<T, A> {
+    private static class MyBuilder<T, A extends Enum<?>> extends AbstractSecurityBuilder<T, A> {
         public MyBuilder(final Class<T> typeClass, final A algorithm) throws NoSuchAlgorithmException, InstanceException {
             super(typeClass, algorithm);
         }
@@ -38,7 +38,7 @@ public class TestAbstractSecurityBuilder extends TestCase {
 
     public void testNoSuchMethod() {
         try {
-            new MyBuilder(NoSuchMethodClass.class, MyEnum.ABC);
+            new MyBuilder<>(NoSuchMethodClass.class, MyEnum.ABC);
             fail("catch InstanceException");
         } catch (Exception ex) {
             assertEquals(InstanceException.class, ex.getClass());
@@ -49,7 +49,7 @@ public class TestAbstractSecurityBuilder extends TestCase {
 
     public void testNoSuchAlgorithm() {
         try {
-            new MyBuilder(MyClass.class, MyEnum.NO_SUCH_ALGORITHM);
+            new MyBuilder<>(MyClass.class, MyEnum.NO_SUCH_ALGORITHM);
             fail("catch NoSuchAlgorithmException");
         } catch (Exception ex) {
             assertEquals(NoSuchAlgorithmException.class, ex.getClass());

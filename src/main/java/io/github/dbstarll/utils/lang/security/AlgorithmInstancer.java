@@ -10,8 +10,8 @@ public final class AlgorithmInstancer<T, A extends Enum<?>> implements Instancer
     private final String provider;
 
     /**
-     * @param algorithm
-     * @param provider
+     * @param algorithm 算法
+     * @param provider  算法提供者
      */
     public AlgorithmInstancer(final A algorithm, final String provider) {
         this.algorithm = algorithm;
