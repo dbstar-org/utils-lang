@@ -38,7 +38,7 @@ public final class AlgorithmInstancer<T, A extends Enum<?>> implements Instancer
                 return (T) method.invoke(null, algorithm.toString(), provider);
             }
         } catch (InvocationTargetException e) {
-            throw new InstanceException("call getInstance() throws exception for: " + typeClass.getName(), e.getCause());
+            throw new InstanceException("call getInstance() throws error for: " + typeClass.getName(), e.getCause());
         } catch (IllegalAccessException e) {
             throw new InstanceException("call getInstance() failed for: " + typeClass.getName(), e);
         }
