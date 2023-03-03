@@ -3,18 +3,20 @@ package io.github.dbstarll.utils.lang.line;
 import io.github.dbstarll.utils.lang.bytes.Bytes;
 import io.github.dbstarll.utils.lang.io.EncryptInputStream;
 import io.github.dbstarll.utils.lang.wrapper.IterableWrapper;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.zip.GZIPInputStream;
 
 public class Lines extends LineIterator implements Iterable<String> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Lines.class);
-
     private final LineValidator lineValidator;
 
     /**
@@ -195,11 +197,7 @@ public class Lines extends LineIterator implements Iterable<String> {
         if (super.hasNext()) {
             return true;
         } else {
-            try {
-                close();
-            } catch (IOException e) {
-                LOGGER.warn("close failed", e);
-            }
+            IOUtils.closeQuietly(this);
             return false;
         }
     }
