@@ -45,11 +45,11 @@ public class TestAbstractSecurityBuilder extends TestCase {
         }
     }
 
-    private enum MyEnum {
+    public enum MyEnum {
         ABC, NO_SUCH_ALGORITHM
     }
 
-    private static class MyBuilder<T, A extends Enum<?>> extends AbstractSecurityBuilder<T, A> {
+    private static class MyBuilder<T, A extends Enum<A>> extends AbstractSecurityBuilder<T, A> {
         public MyBuilder(final Class<T> typeClass, final A algorithm) throws NoSuchAlgorithmException, InstanceException {
             super(typeClass, algorithm);
         }

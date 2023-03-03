@@ -9,7 +9,7 @@ public class TestEnumUtils extends TestCase {
         assertEquals("abd", EnumUtils.name(Custom.ABD));
     }
 
-    public void testVa() {
+    public void testValueOf() {
         assertSame(Custom.ABD, EnumUtils.valueOf(Custom.class, "abd"));
     }
 }

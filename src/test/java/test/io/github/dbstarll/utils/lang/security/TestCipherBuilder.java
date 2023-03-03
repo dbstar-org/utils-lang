@@ -1,7 +1,11 @@
 package test.io.github.dbstarll.utils.lang.security;
 
 import io.github.dbstarll.utils.lang.digest.Md5Digestor;
-import io.github.dbstarll.utils.lang.security.*;
+import io.github.dbstarll.utils.lang.security.CipherAlgorithm;
+import io.github.dbstarll.utils.lang.security.CipherAlgorithmMode;
+import io.github.dbstarll.utils.lang.security.CipherAlgorithmPadding;
+import io.github.dbstarll.utils.lang.security.SecureRandomAlgorithm;
+import io.github.dbstarll.utils.lang.security.SecurityFactory;
 import junit.framework.TestCase;
 
 import javax.crypto.Cipher;
@@ -18,9 +22,9 @@ public class TestCipherBuilder extends TestCase {
         final byte[] ivBytes = new Md5Digestor().digest("vectorKey".getBytes(StandardCharsets.UTF_8));
         final IvParameterSpec iv = new IvParameterSpec(ivBytes);
 
-        final SecureRandom random = SecurityFactory.builder(SecureRandomAlgorithm.SHA1PRNG).build();
+        final SecureRandom random = SecurityFactory.builder(SecureRandomAlgorithm.SHA_1_PRNG).build();
         final Cipher encryptCipher = SecurityFactory
-                .builder(CipherAlgorithm.AES, CipherAlgorithmMode.CBC, CipherAlgorithmPadding.PKCS5Padding)
+                .builder(CipherAlgorithm.AES, CipherAlgorithmMode.CBC, CipherAlgorithmPadding.PKCS5_PADDING)
                 .encrypt(secretKey, iv, random)
                 .build();
 
@@ -28,7 +32,7 @@ public class TestCipherBuilder extends TestCase {
         final byte[] encrypted = encryptCipher.doFinal(content.getBytes(StandardCharsets.UTF_8));
 
         final Cipher decryptCipher = SecurityFactory
-                .builder(CipherAlgorithm.AES, CipherAlgorithmMode.CBC, CipherAlgorithmPadding.PKCS5Padding)
+                .builder(CipherAlgorithm.AES, CipherAlgorithmMode.CBC, CipherAlgorithmPadding.PKCS5_PADDING)
                 .decrypt(secretKey, iv, random)
                 .build();
         final byte[] decrypted = decryptCipher.doFinal(encrypted);
