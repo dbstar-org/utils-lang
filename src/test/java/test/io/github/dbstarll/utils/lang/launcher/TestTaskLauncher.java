@@ -46,7 +46,6 @@ public class TestTaskLauncher extends TestCase {
 
     /**
      * 测试任务执行异常.
-     *
      */
     public void testRunFailed() {
         Launcher launcher = new Launcher();
@@ -54,10 +53,11 @@ public class TestTaskLauncher extends TestCase {
 
         try {
             assertEquals(0, launcher.run("token", "0"));
-            fail("catch IllegalArgumentException");
-        } catch (IllegalArgumentException ex) {
-            assertEquals(LaunchException.class, ex.getCause().getClass());
-            assertEquals(IllegalAccessException.class, ex.getCause().getCause().getClass());
+            fail("catch LaunchException");
+        } catch (LaunchException ex) {
+            assertEquals("无法实例化: " + MockErrorTask.class, ex.getMessage());
+            assertNotNull(ex.getCause());
+            assertEquals(IllegalAccessException.class, ex.getCause().getClass());
         }
     }
 
