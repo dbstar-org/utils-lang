@@ -17,13 +17,13 @@ public class LineTypeOperator implements LineOperator<LineType>, BatchLineOperat
     @Override
     public LineType operate(String line) {
         if (StringUtils.isBlank(line)) {
-            return LineType.blank;
+            return LineType.BLANK;
         } else if (line.startsWith("#")) {
-            return LineType.comment;
+            return LineType.COMMENT;
         } else if (line.startsWith("exception")) {
             throw new IllegalArgumentException();
         } else {
-            return LineType.line;
+            return LineType.LINE;
         }
     }
 }

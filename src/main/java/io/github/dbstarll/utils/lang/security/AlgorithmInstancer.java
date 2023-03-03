@@ -1,12 +1,13 @@
 package io.github.dbstarll.utils.lang.security;
 
+import io.github.dbstarll.utils.lang.enums.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-public final class AlgorithmInstancer<T, A extends Enum<?>> implements Instancer<T> {
+public final class AlgorithmInstancer<T, A extends Enum<A>> implements Instancer<T> {
     private final A algorithm;
     private final String provider;
 
@@ -38,9 +39,9 @@ public final class AlgorithmInstancer<T, A extends Enum<?>> implements Instancer
         }
         try {
             if (StringUtils.isBlank(provider)) {
-                return (T) method.invoke(null, algorithm.toString());
+                return (T) method.invoke(null, EnumUtils.name(algorithm));
             } else {
-                return (T) method.invoke(null, algorithm.toString(), provider);
+                return (T) method.invoke(null, EnumUtils.name(algorithm), provider);
             }
         } catch (InvocationTargetException e) {
             throw new InstanceException("call getInstance() throws error for: " + typeClass.getName(), e.getCause());

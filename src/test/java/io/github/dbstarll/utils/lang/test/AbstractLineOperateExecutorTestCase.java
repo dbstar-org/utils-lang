@@ -57,13 +57,13 @@ public abstract class AbstractLineOperateExecutorTestCase extends TestCase {
         if (!(executor instanceof BatchLineOperateExecutor)) {
             for (Entry<LineType, Long> entry : executor) {
                 switch (entry.getKey()) {
-                    case line:
+                    case LINE:
                         assertEquals(30030, entry.getValue().longValue());
                         break;
-                    case blank:
+                    case BLANK:
                         assertEquals(20020, entry.getValue().longValue());
                         break;
-                    case comment:
+                    case COMMENT:
                         assertEquals(10010, entry.getValue().longValue());
                         break;
                     default:

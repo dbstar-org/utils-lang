@@ -1,8 +1,15 @@
 package io.github.dbstarll.utils.lang.security;
 
+import io.github.dbstarll.utils.lang.enums.EnumUtils;
+
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
-import java.security.*;
+import java.security.AlgorithmParameters;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 
 public final class CipherBuilder extends AbstractSecurityBuilder<Cipher, CipherAlgorithm> {
@@ -102,12 +109,12 @@ public final class CipherBuilder extends AbstractSecurityBuilder<Cipher, CipherA
 
         TransformationInstancer(final CipherAlgorithm algorithm, final CipherAlgorithmMode mode,
                                 final CipherAlgorithmPadding padding) {
-            final StringBuilder builder = new StringBuilder(algorithm.toString());
+            final StringBuilder builder = new StringBuilder(EnumUtils.name(algorithm));
             if (mode != null) {
-                builder.append('/').append(mode);
+                builder.append('/').append(EnumUtils.name(mode));
             }
             if (padding != null) {
-                builder.append('/').append(padding);
+                builder.append('/').append(EnumUtils.name(padding));
             }
             this.transformation = builder.toString();
         }

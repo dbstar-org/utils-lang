@@ -21,17 +21,13 @@ public abstract class AbstractLauncher<E> implements Task {
             throw new IllegalArgumentException("Need task token.");
         }
 
-        String token = args[0];
-        Class<? extends E> taskClass = tasks.get(token);
+        final String token = args[0];
+        final Class<? extends E> taskClass = tasks.get(token);
         if (taskClass == null) {
             throw new IllegalArgumentException("Unknown task token: " + token);
         }
 
-        try {
-            return run(taskClass, ArrayUtils.subarray(args, 1, args.length));
-        } catch (LaunchException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        return run(taskClass, ArrayUtils.subarray(args, 1, args.length));
     }
 
     protected abstract int run(Class<? extends E> taskClass, String... args) throws LaunchException;

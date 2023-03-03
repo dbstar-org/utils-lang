@@ -1,5 +1,19 @@
 package io.github.dbstarll.utils.lang.security;
 
+import io.github.dbstarll.utils.lang.enums.EnumValue;
+
+@EnumValue(method = "toString")
 public enum SecureRandomAlgorithm {
-    NativePRNG, SHA1PRNG
+    NATIVE_PRNG("NativePRNG"), SHA1_PRNG("SHA1PRNG");
+
+    private final String title;
+
+    SecureRandomAlgorithm(final String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

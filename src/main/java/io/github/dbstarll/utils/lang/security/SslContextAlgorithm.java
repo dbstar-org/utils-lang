@@ -1,20 +1,19 @@
 package io.github.dbstarll.utils.lang.security;
 
+import io.github.dbstarll.utils.lang.enums.EnumValue;
+
+@EnumValue(method = "toString")
 public enum SslContextAlgorithm {
-    Default, TLSv1, TLSv11("TLSv1.1"), TLSv12("TLSv1.2");
+    DEFAULT("Default"), TLS_V1("TLSv1"), TLS_V11("TLSv1.1"), TLS_V12("TLSv1.2");
 
-    private final String algorithm;
+    private final String title;
 
-    SslContextAlgorithm() {
-        this(null);
-    }
-
-    SslContextAlgorithm(final String algorithm) {
-        this.algorithm = algorithm;
+    SslContextAlgorithm(final String title) {
+        this.title = title;
     }
 
     @Override
     public String toString() {
-        return algorithm == null ? name() : algorithm;
+        return title;
     }
 }

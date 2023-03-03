@@ -1,6 +1,10 @@
 package test.io.github.dbstarll.utils.lang.line;
 
-import io.github.dbstarll.utils.lang.line.*;
+import io.github.dbstarll.utils.lang.line.LineOperator;
+import io.github.dbstarll.utils.lang.line.LineUtils;
+import io.github.dbstarll.utils.lang.line.LineValidator;
+import io.github.dbstarll.utils.lang.line.Lines;
+import io.github.dbstarll.utils.lang.line.VoidLineOperator;
 import io.github.dbstarll.utils.lang.test.LineType;
 import io.github.dbstarll.utils.lang.test.LineTypeOperator;
 import junit.framework.TestCase;
@@ -32,9 +36,9 @@ public class TestLineUtils extends TestCase {
         Iterable<String> lines = Lines.open(new File("src/test/resources/lines.txt"),
                 StandardCharsets.UTF_8, LineValidator.ALL);
         Map<LineType, Integer> rs = LineUtils.operate(lines, LINE_TYPE_OPERATOR);
-        assertEquals(2, rs.get(LineType.blank).intValue());
-        assertEquals(1, rs.get(LineType.comment).intValue());
-        assertEquals(3, rs.get(LineType.line).intValue());
+        assertEquals(2, rs.get(LineType.BLANK).intValue());
+        assertEquals(1, rs.get(LineType.COMMENT).intValue());
+        assertEquals(3, rs.get(LineType.LINE).intValue());
     }
 
     /**
@@ -43,7 +47,7 @@ public class TestLineUtils extends TestCase {
     public void testOperateLogger() {
         final InputStream in = ClassLoader.getSystemResourceAsStream("lines.txt-encrypt.gz");
         assertEquals(3, LineUtils.operate(LOGGER, "lines", in, "encryptedKey", LINE_TYPE_OPERATOR)
-                .get(LineType.line).intValue());
+                .get(LineType.LINE).intValue());
     }
 
     /**
