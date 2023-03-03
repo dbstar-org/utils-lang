@@ -8,9 +8,9 @@ public enum SecretKeyFactoryAlgorithm {
     DE_SEDE("DESede"),
     PBE_WITH_MD5_AND_DES("PBEWithMD5AndDES"),
     PBE_WITH_MD5_AND_TRIPLE_DES("PBEWithMD5AndTripleDES"),
-    PBE_WITH_SHA_1_AND_DE_SEDE("PBEWithSHA1AndDESede"),
-    PBE_WITH_SHA_1_AND_RC2_40("PBEWithSHA1AndRC2_40"),
-    PBKDF_2_WITH_HMAC_SHA_1("PBKDF2WithHmacSHA1");
+    PBE_WITH_SHA1_AND_DE_SEDE("PBEWithSHA1AndDESede"),
+    PBE_WITH_SHA1_AND_RC2_40("PBEWithSHA1AndRC2_40"),
+    PBKDF2_WITH_HMAC_SHA1("PBKDF2WithHmacSHA1");
 
     private final String title;
 

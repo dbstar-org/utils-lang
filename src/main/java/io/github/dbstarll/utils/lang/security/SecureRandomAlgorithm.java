@@ -4,7 +4,7 @@ import io.github.dbstarll.utils.lang.enums.EnumValue;
 
 @EnumValue(method = "toString")
 public enum SecureRandomAlgorithm {
-    NATIVE_PRNG("NativePRNG"), SHA_1_PRNG("SHA1PRNG");
+    NATIVE_PRNG("NativePRNG"), SHA1_PRNG("SHA1PRNG");
 
     private final String title;
 

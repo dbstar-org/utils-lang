@@ -4,7 +4,7 @@ import io.github.dbstarll.utils.lang.enums.EnumValue;
 
 @EnumValue(method = "toString")
 public enum MessageDigestAlgorithm {
-    MD2("MD2"), MD5("MD5"), SHA("SHA"), SHA_256("SHA-256"), SHA_384("SHA-384"), SHA_512("SHA-512");
+    MD2("MD2"), MD5("MD5"), SHA("SHA"), SHA256("SHA-256"), SHA384("SHA-384"), SHA512("SHA-512");
 
     private final String title;
 

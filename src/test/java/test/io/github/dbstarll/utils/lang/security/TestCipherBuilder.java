@@ -22,7 +22,7 @@ public class TestCipherBuilder extends TestCase {
         final byte[] ivBytes = new Md5Digestor().digest("vectorKey".getBytes(StandardCharsets.UTF_8));
         final IvParameterSpec iv = new IvParameterSpec(ivBytes);
 
-        final SecureRandom random = SecurityFactory.builder(SecureRandomAlgorithm.SHA_1_PRNG).build();
+        final SecureRandom random = SecurityFactory.builder(SecureRandomAlgorithm.SHA1_PRNG).build();
         final Cipher encryptCipher = SecurityFactory
                 .builder(CipherAlgorithm.AES, CipherAlgorithmMode.CBC, CipherAlgorithmPadding.PKCS5_PADDING)
                 .encrypt(secretKey, iv, random)
