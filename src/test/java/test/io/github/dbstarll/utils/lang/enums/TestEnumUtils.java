@@ -12,4 +12,8 @@ public class TestEnumUtils extends TestCase {
     public void testValueOf() {
         assertSame(Custom.ABD, EnumUtils.valueOf(Custom.class, "abd"));
     }
+
+    public void testStream() {
+        assertSame(2L, EnumUtils.stream(Custom.class).count());
+    }
 }

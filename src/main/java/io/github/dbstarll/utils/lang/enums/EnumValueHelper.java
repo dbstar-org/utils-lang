@@ -8,13 +8,14 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 
 import static org.apache.commons.lang3.Validate.notBlank;
 
 public final class EnumValueHelper<T extends Enum<T>> {
     private static final String DEFAULT_METHOD_NAME = "name";
 
-    private final String enumType;
+    private final Class<T> enumType;
     private final Method method;
     private final Map<String, T> names = new ConcurrentHashMap<>();
 
@@ -24,14 +25,14 @@ public final class EnumValueHelper<T extends Enum<T>> {
      * @param enumType the enum class
      */
     public EnumValueHelper(final Class<T> enumType) {
-        this.enumType = enumType.getName();
+        this.enumType = enumType;
         this.method = parseMethod(enumType);
-        Arrays.stream(enumType.getEnumConstants()).forEach(e -> names.compute(name(e), (name, exist) -> {
+        stream().forEach(e -> names.compute(name(e), (name, exist) -> {
             if (exist == null) {
                 return e;
             } else {
                 throw new IllegalArgumentException(
-                        String.format("duplicate name [%s] for [%s] and [%s]: %s", name, exist, e, this.enumType));
+                        String.format("duplicate name [%s] for [%s] and [%s]: %s", name, exist, e, enumType.getName()));
             }
         }));
     }
@@ -90,10 +91,10 @@ public final class EnumValueHelper<T extends Enum<T>> {
             return (String) method.invoke(enumValue);
         } catch (InvocationTargetException ex) {
             throw new IllegalStateException(
-                    String.format("get enum[%s]'s name failed: %s", enumValue, enumType), ex.getCause());
+                    String.format("get enum[%s]'s name failed: %s", enumValue, enumType.getName()), ex.getCause());
         } catch (Exception ex) {
             throw new IllegalStateException(
-                    String.format("get enum[%s]'s name failed: %s", enumValue, enumType), ex);
+                    String.format("get enum[%s]'s name failed: %s", enumValue, enumType.getName()), ex);
         }
     }
 
@@ -106,7 +107,16 @@ public final class EnumValueHelper<T extends Enum<T>> {
      */
     public T valueOf(final String name) {
         return names.computeIfAbsent(notBlank(name, "name is blank"), n -> {
-            throw new IllegalArgumentException(String.format("No enum constant[%s]: %s", name, enumType));
+            throw new IllegalArgumentException(String.format("No enum constant[%s]: %s", name, enumType.getName()));
         });
+    }
+
+    /**
+     * Returns a sequential {@link Stream} with the enum constants.
+     *
+     * @return a {@code Stream} for the enum constants
+     */
+    public Stream<T> stream() {
+        return Arrays.stream(enumType.getEnumConstants());
     }
 }

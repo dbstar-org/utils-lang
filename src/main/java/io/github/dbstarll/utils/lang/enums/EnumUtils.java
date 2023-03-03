@@ -2,6 +2,7 @@ package io.github.dbstarll.utils.lang.enums;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Stream;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -37,7 +38,6 @@ public final class EnumUtils {
      * @return the enum constant of the specified enum type with the specified name
      * @throws IllegalArgumentException if the specified enum type has no constant with the specified name
      * @throws NullPointerException     if {@code enumType} is null
-     * @since 1.0.8
      */
     public static <T extends Enum<T>> T valueOf(final Class<T> enumType, final String name) {
         return getEnumValueHelper(notNull(enumType, "enumType is null")).valueOf(name);
@@ -46,5 +46,16 @@ public final class EnumUtils {
     @SuppressWarnings("unchecked")
     private static <T extends Enum<T>> EnumValueHelper<T> getEnumValueHelper(final Class<T> enumType) {
         return (EnumValueHelper<T>) HELPERS.computeIfAbsent(enumType, t -> new EnumValueHelper<>(enumType));
+    }
+
+    /**
+     * Returns a sequential {@link Stream} with the enum constant of the specified enum type.
+     *
+     * @param enumType the {@code Class} object of the enum type from which to return a constant
+     * @param <T>      The enum type whose constant is to be returned
+     * @return a {@code Stream} for the enum constants
+     */
+    public static <T extends Enum<T>> Stream<T> stream(final Class<T> enumType) {
+        return getEnumValueHelper(notNull(enumType, "enumType is null")).stream();
     }
 }
